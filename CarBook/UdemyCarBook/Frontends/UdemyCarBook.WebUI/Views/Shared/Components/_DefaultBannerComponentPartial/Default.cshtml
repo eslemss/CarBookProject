@@ -1,0 +1,122 @@
+﻿@model List<UdemyCarBook.Dto.BannerDtos.ResultBannerDto>
+
+<section class="ftco-section ftco-no-pt mb-5">
+    <div class="container position-relative">
+        <div id="promoCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+            @* Alt Noktalar (Indicators) *@
+            <ol class="carousel-indicators" style="bottom: -50px;">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <li data-target="#promoCarousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")" style="background-color: #ff9f1c; width: 12px; height: 12px; border-radius: 50%;"></li>
+                }
+            </ol>
+
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="card border-0 shadow-sm" style="border-radius: 25px; overflow: hidden; background: #fff; min-height: 380px;">
+                            <div class="row no-gutters h-100">
+                                @* Sol Taraf: Metin *@
+                                <div class="col-md-7 d-flex align-items-center">
+                                    <div class="card-body p-5">
+                                        <span class="badge badge-warning px-3 py-2 mb-3" style="border-radius: 50px; font-weight: 700; color: #fff; background-color: #ff9f1c;">SINIRLI SÜRE</span>
+                                        <h2 class="card-title font-weight-bold" style="color: #1c2731; font-size: 38px; line-height: 1.1; letter-spacing: -1px;">
+                                            @Model[i].Title
+                                        </h2>
+                                        <p class="card-text my-4" style="color: #555; font-size: 18px; line-height: 1.6;">
+                                            @Model[i].Description
+                                        </p>
+                                        <div class="mt-4">
+                                            <a href="/CarPricing/Index/" class="btn p-3 px-5" style="background: #1c2731; color: #fff; border-radius: 12px; font-weight: 700; font-size: 16px; transition: 0.3s;">
+                                                Fırsatı Yakala <i class="ml-2 ion-ios-arrow-forward"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* Sağ Taraf: Görsel *@
+                                <div class="col-md-5">
+                                    <div style="background-image: url('@Model[i].ImageUrl'); background-size: cover; background-position: center; height: 100%; min-height: 380px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @* --- YAN OKLAR --- *@
+            <a class="carousel-control-prev custom-nav" href="#promoCarousel" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Geri</span>
+            </a>
+            <a class="carousel-control-next custom-nav" href="#promoCarousel" role="button" data-slide="next">
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">İleri</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Okların Tasarımı ve Yerleşimi */
+    .custom-nav {
+        width: 45px;
+        height: 45px;
+        background: #fff;
+        border-radius: 50%;
+        color: #1c2731;
+        opacity: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    }
+
+        .custom-nav:hover {
+            background: #ff9f1c;
+            color: #fff;
+        }
+
+    .carousel-control-prev.custom-nav {
+        left: -22px;
+    }
+
+    .carousel-control-next.custom-nav {
+        right: -22px;
+    }
+
+    /* Fade Geçişi */
+    .carousel-fade .carousel-item {
+        opacity: 0;
+        transition-duration: 0.6s;
+        transition-property: opacity;
+    }
+
+        .carousel-fade .carousel-item.active {
+            opacity: 1;
+        }
+
+    #promoCarousel .carousel-indicators li.active {
+        width: 30px;
+        border-radius: 10px;
+    }
+</style>
+
+@* --- GİRİŞ UYARISI SCRIPT --- *@
+@if (TempData["LoginSuccess"] != null)
+{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        swal({
+            title: "Giriş Başarılı!",
+            // Html.Raw ile Baran ismindeki Türkçe karakterleri ve virgülü koruyoruz
+            text: "@Html.Raw(TempData["LoginSuccess"])",
+            // İkonu sildik
+            button: "Harika!",
+        });
+    </script>
+}

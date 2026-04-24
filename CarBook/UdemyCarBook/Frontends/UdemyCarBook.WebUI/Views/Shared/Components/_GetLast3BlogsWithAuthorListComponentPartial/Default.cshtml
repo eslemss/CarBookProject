@@ -1,0 +1,88 @@
+﻿@model List<ResultLast3BlogsWithAuthors>
+<style>
+    /* Bu sayfaya özel Lacivert Tema Ayarları */
+    .custom-blog-section .subheading {
+        color: #1c2731 !important; /* "Bloglar" yazısı lacivert */
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .custom-blog-section h2 {
+        color: #1c2731 !important;
+        font-weight: 800;
+    }
+
+    /* Tarih ve Yazar Bilgisi */
+    .custom-blog-section .meta div a {
+        color: rgba(28, 39, 49, 0.5) !important; /* Hafif transparan lacivert */
+        font-size: 13px;
+    }
+
+        .custom-blog-section .meta div a:hover {
+            color: #1c2731 !important;
+        }
+
+    /* Kart Başlığı */
+    .custom-blog-section .heading a {
+        color: #1c2731 !important;
+        transition: 0.3s;
+    }
+
+        .custom-blog-section .heading a:hover {
+            color: #000 !important; /* Üzerine gelince tam siyah */
+        }
+
+    /* Devamını Oku Butonu - Sadece Lacivert Varyasyonları */
+    .btn-premium-dark {
+        background-color: #1c2731 !important;
+        border: 1px solid #1c2731 !important;
+        color: #ffffff !important;
+        padding: 10px 20px !important;
+        border-radius: 4px !important;
+        display: inline-block;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none !important;
+    }
+
+        .btn-premium-dark:hover {
+            background-color: #000000 !important; /* Üzerine gelince siyahlaşır */
+            border-color: #000000 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+</style>
+
+<section class="ftco-section custom-blog-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">Bloglar</span>
+                <h2>Son Bloglar</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 d-flex ftco-animate">
+                    <div class="blog-entry justify-content-end w-100">
+                        <a href="/Blog/BlogDetail/@item.BlogID" class="block-20" style="background-image: url('@item.CoverImageUrl'); border-radius: 8px 8px 0 0;">
+                        </a>
+                        <div class="text pt-4">
+                            <div class="meta mb-3">
+                                <div><a href="#">@item.CreatedDate.ToShortDateString()</a></div>
+                                <div><a href="#">@item.AuthorName</a></div>
+                            </div>
+                            <h3 class="heading mt-2"><a href="/Blog/BlogDetail/@item.BlogID">@item.Title</a></h3>
+                            <p class="mt-4">
+                                <a href="/Blog/BlogDetail/@item.BlogID" class="btn-premium-dark">Devamını Oku</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

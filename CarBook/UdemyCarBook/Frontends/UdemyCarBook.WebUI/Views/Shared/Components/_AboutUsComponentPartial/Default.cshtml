@@ -1,0 +1,95 @@
+﻿<style>
+    /* 1. SECTION SEVİYESİNDE TEMİZLİK */
+    /* id kullanarak hiyerarşide en üste çıkıyoruz */
+    #premium-about-section {
+        background: #ffffff !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+        /* 2. YEŞİL ARKA PLANI BURADA ÖLDÜRÜYORUZ */
+        #premium-about-section::before {
+            content: "" !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 50% !important; /* Sayfanın yarısı */
+            height: 100% !important;
+            background: #1c2731 !important; /* İŞTE O KOYU RENK */
+            z-index: -1 !important;
+            display: block !important;
+        }
+
+        /* 3. TEMPLATE'İN TÜM GİZLİ KATMANLARINI SİLEN ATOMİK BOMBA */
+        #premium-about-section .one-half,
+        #premium-about-section .overlay,
+        #premium-about-section::after {
+            display: none !important;
+            background: transparent !important;
+        }
+
+    /* 4. Kart Tasarımı */
+    .about-card-custom {
+        background: #ffffff !important;
+        border-radius: 15px !important;
+        overflow: hidden !important;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;
+        border: none !important;
+    }
+
+    /* 5. Buton */
+    .custom-btn-about {
+        background-color: #1c2731 !important;
+        color: #ffffff !important;
+        border-radius: 5px !important;
+        font-weight: 700 !important;
+        border: 2px solid #1c2731 !important;
+    }
+
+
+
+        .custom-btn-about:hover {
+            background-color: #ff9f1c !important;
+            border-color: #ff9f1c !important;
+        }
+</style>
+
+@foreach (var item in Model)
+{
+    /* DİKKAT: Buraya id="premium-about-section" ekledik, CSS buna göre çalışacak */
+    <section class="ftco-section ftco-about" id="premium-about-section">
+        <div class="container">
+            <div class="row no-gutters about-card-custom">
+
+                @* Sol Taraf: Resim *@
+                <div class="col-md-6 img img-2"
+                     style="background-image: url(@item.imageUrl); background-size: cover; background-position: center center; min-height: 550px;">
+                </div>
+
+                @* Sağ Taraf: Beyaz Metin Alanı *@
+                <div class="col-md-6 wrap-about bg-white d-flex align-items-center">
+                    <div class="heading-section p-5">
+
+                        <span class="subheading" style="color: #ff9f1c !important; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 15px;">
+                            Hakkımızda
+                        </span>
+
+                        <h2 class="mb-4" style="color: #1c2731 !important; font-weight: 800; font-size: 34px; border-left: 6px solid #ff9f1c; padding-left: 20px;">
+                            @item.title
+                        </h2>
+
+                        <p style="color: #555 !important; line-height: 1.8; text-align: justify;">
+                            @item.description
+                        </p>
+
+                        <div class="mt-4">
+                            <a href="/CarPricing/Index/" class="btn custom-btn-about py-3 px-5">
+                                Hemen Araç Kirala
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

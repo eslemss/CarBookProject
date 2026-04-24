@@ -1,0 +1,204 @@
+﻿@model List<ResultCarPricingListWithModelDto>
+@{
+    ViewData["Title"] = "Araç Fiyat Listesi";
+    Layout = "~/Views/ULayout/Index.cshtml";
+
+    // --- VERİ TAŞIMA SİHİRBATI (GÜNCELLENDİ) ---
+    var locationId = Context.Request.Query["locationId"];
+    var dropOffLocationId = Context.Request.Query["dropOffLocationId"]; // Eksik olan 1
+    var pickupDate = Context.Request.Query["pickupDate"];
+    var pickupTime = Context.Request.Query["pickupTime"];             // Eksik olan 2
+    var dropoffDate = Context.Request.Query["dropoffDate"];
+    var dropoffTime = Context.Request.Query["dropoffTime"];           // Eksik olan 3
+
+    // Paketimizi tüm verileri içerecek şekilde büyüterek hazırlıyoruz
+    var queryParams = "";
+    if (!string.IsNullOrEmpty(locationId))
+    {
+        queryParams = $"?locationId={locationId}&dropOffLocationId={dropOffLocationId}&pickupDate={pickupDate}&pickupTime={pickupTime}&dropoffDate={dropoffDate}&dropoffTime={dropoffTime}";
+    }
+}
+<style>
+    .pricing-section {
+        background-color: #f8f9fa;
+        padding: 60px 0;
+    }
+
+    .price-card {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        margin-bottom: 25px;
+        transition: 0.3s ease;
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #ff9800;
+    }
+
+    .card-img-col {
+        flex: 0 0 240px;
+        height: 140px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-right: 30px;
+    }
+
+    .card-info-col {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .brand-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #ff9800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    .model-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #34495e;
+        margin-bottom: 12px;
+    }
+
+    .car-features-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .feature-tag {
+        background: #f1f3f5;
+        color: #7f8c8d;
+        padding: 3px 10px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .card-prices-col {
+        flex: 0 0 320px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 30px;
+        padding: 0 20px;
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+
+    .price-item {
+        text-align: center;
+    }
+
+    .price-amount {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+        .price-amount.active {
+            color: #ff9800;
+        }
+
+    .price-period {
+        font-size: 9px;
+        color: #adb5bd;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .card-action-col {
+        flex: 0 0 140px;
+    }
+
+    .btn-rent-card {
+        background-color: #ff9800;
+        color: #fff !important;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 11px;
+        text-transform: uppercase;
+        display: block;
+        text-align: center;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn-rent-card:hover {
+            background-color: #e68a00;
+            transform: scale(1.02);
+        }
+
+    .rating-small {
+        font-size: 11px;
+        color: #95a5a6;
+        margin-top: 5px;
+    }
+</style>
+
+<section class="pricing-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @foreach (var item in Model)
+                {
+                    <div class="price-card">
+                        <div class="card-img-col" style="background-image:url(@item.CoverImageUrl);"></div>
+
+                        <div class="card-info-col">
+                            <span class="brand-label">@item.Brand</span>
+                            <h3 class="model-title">@item.model</h3>
+
+                            <div class="car-features-row">
+                                <span class="feature-tag">Dizel/Benzin</span>
+                                <span class="feature-tag">Otomatik</span>
+                            </div>
+
+                            <div class="rating-small">
+                                (4.9)
+                            </div>
+                        </div>
+
+                        <div class="card-prices-col">
+                            <div class="price-item">
+                                <span class="price-amount active">₺@item.dailyAmount</span>
+                                <span class="price-period">GÜNLÜK</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-amount">₺@item.weeklyAmount</span>
+                                <span class="price-period">HAFTALIK</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-amount">₺@item.monthlyAmount</span>
+                                <span class="price-period">AYLIK</span>
+                            </div>
+                        </div>
+
+                        <div class="card-action-col">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @* Giriş yapmışsa: ID ve Arama Kriterlerini (queryParams) beraber gönderiyoruz *@
+                                <a href="/Reservation/Index/@item.CarID@queryParams" class="btn-rent-card">Hemen Kirala</a>
+                            }
+                            else
+                            {
+                                @* Giriş yapmamışsa: Layout'taki o 5 saniyelik uyarıyı tetikliyoruz *@
+                                <a href="javascript:void(0);" onclick="showLoginWarning()" class="btn-rent-card">Hemen Kirala</a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

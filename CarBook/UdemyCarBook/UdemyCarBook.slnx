@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/core/">
+    <Project Path="Core/UdemyCarBook.Application/UdemyCarBook.Application.csproj" Id="827bb348-68f0-412b-963f-f0c33b13cc58" />
+    <Project Path="Core/UdemyCarBook.Domain/UdemyCarBook.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Frontends/">
+    <Project Path="Frontends/UdemyCarBook.Dto/UdemyCarBook.Dto.csproj" Id="bf1dba5b-13ca-4fc5-86c8-4bf3c3921338" />
+    <Project Path="Frontends/UdemyCarBook.WebUI/UdemyCarBook.WebUI.csproj" Id="94aa05e7-03b7-40f8-b802-5c56433b580a" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="UdemyCarBook.Persistence/UdemyCarBook.Persistence.csproj" Id="e816df5a-58cc-4087-9e20-6e4312dae1b1" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <File Path="Frontends/UdemyCarBook.WebUI/Program.cs" />
+    <Project Path="Presentation/UdemyCarBook.WebApi/UdemyCarBook.WebApi.csproj" Id="4f45bb7d-e328-4cf3-a73f-a84a875e8280" />
+  </Folder>
+  <Folder Name="/Solution Items/" />
+</Solution>

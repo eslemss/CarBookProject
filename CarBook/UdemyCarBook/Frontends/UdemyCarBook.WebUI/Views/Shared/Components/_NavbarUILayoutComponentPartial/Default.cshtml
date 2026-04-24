@@ -1,0 +1,161 @@
+﻿<style>
+    /* 1. Navbar Genel Yapısı */
+    #ftco-navbar {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(15px);
+        border-bottom: 3px solid #ff9f1c;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 12px 0;
+        transition: all 0.4s ease;
+    }
+
+    /* 2. Logo Tasarımı */
+    .navbar-brand {
+        font-size: 26px !important;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Menü Linkleri */
+    .navbar-nav .nav-item .nav-link {
+        color: #1c2731 !important;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 10px 20px !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+        /* 4. Hover Çizgi Efekti */
+        .navbar-nav .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 20px;
+            background-color: #ff9f1c;
+            transition: width 0.3s ease;
+        }
+
+    .navbar-nav .nav-item:hover .nav-link::after,
+    .navbar-nav .nav-item.active .nav-link::after {
+        width: calc(100% - 40px);
+    }
+
+    /* Aktif Durumu */
+    .navbar-nav .nav-item.active .nav-link {
+        color: #ff9f1c !important;
+        transform: translateY(-1px);
+    }
+
+    /* Mobil Menü Butonu */
+    .navbar-toggler {
+        border: none !important;
+        background: #1c2731 !important;
+        padding: 8px 12px;
+    }
+
+    /* Kullanıcı Bölümü Özel Stilleri */
+    .user-name-nav {
+        color: #ff9f1c !important;
+        font-weight: 800 !important;
+        border-right: 1px solid #ddd;
+        margin-right: 5px;
+    }
+
+    .logout-nav {
+        color: #e74c3c !important; /* Soft kırmızı */
+    }
+
+        .logout-nav:hover {
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 5px;
+        }
+
+    .login-nav {
+        color: #ff9f1c !important;
+        border: 2px solid #ff9f1c;
+        border-radius: 5px;
+        padding: 8px 20px !important;
+        margin-left: 10px;
+    }
+
+        .login-nav:hover {
+            background: #ff9f1c;
+            color: #fff !important;
+        }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="/Default/Index/" style="font-weight: 900; text-transform: uppercase; color: #1c2731;">
+            Car<span style="color: #ff9f1c;">Book</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu" style="color: #fff;"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="/Default/Index/" class="nav-link">Ana Sayfa</a></li>
+                <li class="nav-item"><a href="/About/Index/" class="nav-link">Hakkımızda</a></li>
+                <li class="nav-item"><a href="/CarPricing/Index/" class="nav-link">Fiyatlar</a></li>
+                <li class="nav-item"><a href="/Car/Index/" class="nav-link">Arabalar</a></li>
+                <li class="nav-item"><a href="/Blog/Index/" class="nav-link">Bloglar</a></li>
+                <li class="nav-item"><a href="/Contact/Index/" class="nav-link">İletişim</a></li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @* BURAYA EKLEDİK: Sadece Admin rolündeyse bu buton görünür *@
+                    @if (User.Claims.Any(x => x.Value == "Admin"))
+                    {
+                        <li class="nav-item">
+                            <a href="/Admin/AdminStatistics/Index" class="nav-link" style="color: #ff9f1c !important; font-weight: bold; border: 2px solid #ff9f1c; border-radius: 5px; padding: 5px 15px !important; margin-right: 10px; margin-top: 2px;">
+                                <i class="fa fa-user-shield"></i> ADMİN PANELİ
+                            </a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link user-name-nav">
+                            <i class="mdi mdi-account-circle"></i> @User.Identity.Name
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Login/Logout/" class="nav-link logout-nav">Çıkış Yap</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="/Register/CreateAppUser/" class="nav-link">Kayıt Ol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Login/Index/" class="nav-link login-nav">Giriş Yap</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-item');
+
+        navLinks.forEach(item => {
+            const link = item.querySelector('a');
+            if (link) {
+                const linkHref = link.getAttribute('href');
+
+                // Active sınıfı mantığı
+                if (currentPath === linkHref || (currentPath === "/" && linkHref === "/Default/Index/")) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            }
+        });
+    });
+</script>

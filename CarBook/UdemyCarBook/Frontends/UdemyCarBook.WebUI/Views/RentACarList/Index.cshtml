@@ -1,0 +1,95 @@
+﻿<style>
+    /* Premium Renk Paleti */
+    :root {
+        --main-orange: #ff9f1c;
+        --dark-bg: #2c3e50;
+    }
+
+    /* Ana Buton: Canlı Turuncu */
+    .btn-theme-primary {
+        background-color: var(--main-orange) !important;
+        border: none !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        transition: all 0.3s ease;
+    }
+
+        .btn-theme-primary:hover {
+            background-color: #f39c12 !important;
+            box-shadow: 0 4px 12px rgba(255, 159, 28, 0.4);
+            transform: translateY(-1px);
+        }
+
+    /* Detaylar Butonu: Daha Hafif ve Modern */
+    .btn-theme-outline {
+        background-color: #f8f9fa !important;
+        border: 1px solid #dee2e6 !important;
+        color: #6c757d !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        transition: all 0.3s ease;
+    }
+
+        .btn-theme-outline:hover {
+            background-color: var(--dark-bg) !important;
+            color: #fff !important;
+            border-color: var(--dark-bg) !important;
+        }
+
+    /* Fiyat Alanı Tasarımı */
+    .theme-orange-price {
+        color: var(--main-orange) !important;
+        font-weight: 800 !important;
+        font-size: 1.15rem;
+    }
+
+        .theme-orange-price span {
+            color: #adb5bd !important;
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+</style>
+
+@model List<FilterRentACarDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/ULayout/Index.cshtml";
+}
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="car-wrap rounded ftco-animate">
+                        <div class="img rounded d-flex align-items-end" style="background-image: url(@item.CoverImageUrl);">
+                        </div>
+                        <div class="text">
+                            <h2 class="mb-0">
+                                <a href="#">@item.Model</a>
+                            </h2>
+                            <div class="d-flex mb-3">
+                                <span class="cat" style="text-transform: uppercase; letter-spacing: 1px; color: #ccc;">@item.Brand</span>
+                                <p class="price ml-auto theme-orange-price">
+                                    @item.Amount.ToString("N0") ₺ <span>/Günlük</span>
+                                </p>
+                            </div>
+
+                            <p class="d-flex mb-0 d-block">
+                                <a href="/Reservation/Index/@item.carID" class="btn btn-theme-primary py-2 mr-1">
+                                    Hemen Kirala
+                                </a>
+
+                                <a href="/Car/CarDetail/@item.carID" class="btn btn-theme-outline py-2 ml-1">
+                                    Detaylar
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

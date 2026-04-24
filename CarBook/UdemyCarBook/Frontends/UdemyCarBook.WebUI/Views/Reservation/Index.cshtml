@@ -1,0 +1,129 @@
+﻿@model CreateReservationDto
+@{
+    ViewData["Title"] = "Araç Rezervasyon Formu";
+    Layout = "~/Views/ULayout/Index.cshtml";
+}
+<style>
+    .reservation-form input,
+    .reservation-form select,
+    .reservation-form textarea {
+        border-radius: 10px;
+        border: 1px solid #dee2e6;
+    }
+
+        .reservation-form input:focus,
+        .reservation-form select:focus,
+        .reservation-form textarea:focus {
+            border-color: #2f89fc;
+            box-shadow: 0 0 0 0.1rem rgba(47,137,252,.25);
+        }
+
+    .reservation-form {
+        max-width: 800px;
+        margin: 50px auto;
+    }
+</style>
+
+<form class="reservation-form shadow-lg p-5 rounded bg-white" method="post" asp-action="Index" asp-controller="Reservation">
+    <h4 class="text-center mb-4 font-weight-bold" style="color:#2f89fc;">
+        Araç Rezervasyon Formu
+    </h4>
+
+    <div class="form-group">
+        <label class="font-weight-bold text-dark">Seçilen Araç</label>
+        <input type="text" class="form-control"
+               value="@(ViewBag.v3 != null ? ViewBag.v3.ToString().Replace("Marka Belirtilmemiş", "").Trim() : "Araç Bilgisi Yükleniyor...")"
+               readonly
+               style="background-color: #f1f3f5; font-weight:600;">
+    </div>
+
+    <input type="hidden" asp-for="CarID" value="@ViewBag.CarID" />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Adınız</label>
+                <input type="text" asp-for="Name" class="form-control" placeholder="Adınızı giriniz" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Soyadınız</label>
+                <input type="text" asp-for="Surname" class="form-control" placeholder="Soyadınızı giriniz" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Alış Tarihi ve Saati</label>
+                @* DTO isminiz PickUpFull olduğu için asp-for ile eşledik *@
+                <input type="datetime-local" class="form-control" asp-for="PickUpFull" value="@ViewBag.pickupFull">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">İade Tarihi ve Saati</label>
+                <input type="datetime-local" class="form-control" asp-for="DropOffFull" value="@ViewBag.dropoffFull">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Email</label>
+                <input type="email" asp-for="Email" class="form-control" placeholder="ornek@mail.com" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Telefon</label>
+                <input type="text" asp-for="Phone" class="form-control" placeholder="05xx xxx xx xx" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="font-weight-bold">Alış Lokasyonu</label>
+        @Html.DropDownListFor(x => x.PickUpLocationID,
+        new SelectList((IEnumerable<SelectListItem>)ViewBag.LocationList, "Value", "Text", Model.PickUpLocationID),
+                "Lütfen Alış Lokasyonu Seçiniz",
+                new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label class="font-weight-bold">İade Lokasyonu</label>
+        @Html.DropDownListFor(x => x.DropOffLocationID,
+                new SelectList((IEnumerable<SelectListItem>)ViewBag.LocationList, "Value", "Text", Model.DropOffLocationID),
+                "Lütfen İade Lokasyonu Seçiniz",
+                new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Yaş</label>
+                <input type="number" asp-for="Age" class="form-control" placeholder="Yaşınız" required min="18">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold">Ehliyet Yılı</label>
+                <input type="number" asp-for="DriverLicenseYear" class="form-control" placeholder="Örn: 2018" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="font-weight-bold">Ek Açıklama</label>
+        <textarea asp-for="Description" rows="4" class="form-control" placeholder="Varsa eklemek istedikleriniz..."></textarea>
+    </div>
+
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary px-5 py-3" style="border-radius:30px; font-weight:600;">
+            Rezervasyonu Tamamla
+        </button>
+    </div>
+</form>

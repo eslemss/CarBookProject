@@ -1,0 +1,141 @@
+﻿@model List<UdemyCarBook.Dto.BannerDtos.ResultBannerDto>
+
+<style>
+    /* 1. Hero Alanı Yapılandırması */
+    .hero-wrap-custom {
+        width: 100%;
+        height: 100vh !important;
+        min-height: 700px;
+        position: relative;
+        background-position: center center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+        /* 2. Premium Overlay (Kısa kalma sorunu çözüldü) */
+        .hero-wrap-custom .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100% !important;
+            background: linear-gradient(to bottom, rgba(28, 39, 49, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%) !important;
+            z-index: 1;
+        }
+
+        .hero-wrap-custom .container {
+            position: relative;
+            z-index: 5;
+        } 
+
+        /* 3. Tipografi */
+        .hero-wrap-custom h1 {
+            font-weight: 900 !important;
+            font-size: 4.5rem !important;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+        }
+
+    /* 4. Video Butonu ve Animasyon (Hata vermemesi için @@ kullanıldı) */
+    .icon-wrap-custom {
+        text-decoration: none !important;
+        transition: transform 0.3s ease;
+    }
+
+        .icon-wrap-custom .icon {
+            width: 80px;
+            height: 80px;
+            background: #ff9f1c; /* Marka Turuncusu */
+            border-radius: 50%;
+            color: #1c2731;
+            font-size: 24px;
+            box-shadow: 0 0 25px rgba(255, 159, 28, 0.5);
+            animation: pulse-orange 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    @@keyframes pulse-orange {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 159, 28, 0.7);
+        }
+
+        70% {
+            box-shadow: 0 0 0 25px rgba(255, 159, 28, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 159, 28, 0);
+        }
+    }
+
+    /* 5. Mobil Uyumluluk (Hata vermemesi için @@ kullanıldı) */
+    @@media (max-width: 991.98px) {
+        .hero-wrap-custom h1 {
+            font-size: 2.8rem !important;
+        }
+
+        .hero-wrap-custom {
+            background-attachment: scroll;
+        }
+    }
+</style>
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var item in Model)
+    {
+        <div class="hero-wrap hero-wrap-custom">
+            @* Arka Plan Görseli - Porsche Teması *@
+            <div style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; position: absolute; width: 100%; height: 100%; z-index: 0;"></div>
+
+            <div class="overlay"></div>
+
+            <div class="container">
+                <div class="row no-gutters justify-content-center align-items-center">
+                    <div class="col-lg-12 text-center">
+                        <div class="text ftco-animate">
+                            <h1 class="mb-4">@item.Title</h1>
+                            <p class="mb-5" style="font-size: 20px; color: rgba(255,255,255,0.9); font-weight: 400; max-width: 850px; margin: 0 auto; font-style: normal !important;">
+                                @item.Description
+                            </p>
+
+                            <a href="@item.VideoUrl" class="icon-wrap-custom popup-youtube d-inline-flex align-items-center">
+                                <div class="icon">
+                                    <span class="fa fa-play"></span>
+                                </div>
+                                <span class="video-desc" style="margin-left: 20px; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 15px;">
+                                    @item.VideoDescription
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    @if (TempData["LoginSuccess"] != null)
+    {
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            swal({
+                title: "Giriş Başarılı!",
+                // Değişkeni doğrudan Raw içine gönderiyoruz
+                text: "@Html.Raw(TempData["LoginSuccess"]?.ToString())",
+                button: "Harika!",
+            });
+        </script>
+    }
+}

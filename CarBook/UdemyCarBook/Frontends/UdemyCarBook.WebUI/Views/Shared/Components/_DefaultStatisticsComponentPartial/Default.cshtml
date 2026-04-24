@@ -1,0 +1,126 @@
+﻿<style>
+
+    /* 1. Arka Plan: Şeffaf arka plan */
+        #section-counter {
+                background: transparent !important;
+                  padding: 90px 0;
+                position: relative;
+
+    }
+
+
+        /* Yeşilliği kökten silen temizlik */
+            #section-counter .overlay {
+                    display: none !important;
+
+        }
+
+
+    /* 2. Kart Yapısı: Kutu çerçevelerini kaldırıp dikey çizgilerle (border-right) ayırma */
+        .block-18 {
+                text-align: center;
+                padding: 20px;
+                transition: all 0.3s ease;
+
+    }
+
+
+        /* Sayılar: Daha estetik bir renk (örneğin koyu lacivert) */
+            .block-18 .number {
+                    color: #1c2731 !important;
+                      font-size: 48px !important;
+                    font-weight: 700 !important;
+                    display: block;
+                    margin-bottom: 10px;
+                    transition: color 0.3s ease;
+
+        }
+
+
+        /* Metinler: Daha soft bir gri */
+            .block-18 span {
+                    color: rgba(28, 39, 49, 0.7) !important;
+                    font-size: 13px;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    letter-spacing: 2px;
+                    display: block;
+                    font-style: normal !important;
+
+        }
+
+
+    /* Estetik Dokunuş: Kartların arasına ince zarif çizgiler */
+        .counter-wrap:not(:last-child) .block-18 {
+                border-right: 1px solid rgba(28, 39, 49, 0.1);
+
+    }
+
+
+    /* Hover Efekti: Sadece sayı turuncuya dönsün ve hafifçe parlasın */
+        .block-18:hover .number {
+                color: #ff9f1c !important;
+                transform: scale(1.05);
+
+    }
+
+        .block-18:hover span {
+                color: #1c2731 !important;
+
+    }
+
+
+    /* Mobil Uyumluluk için çizgileri yönetme */
+        @@media (max-width: 991.98px) {
+                .counter-wrap:not(:last-child) .block-18
+
+    {
+                    border-right: none;
+                    border-bottom: 1px solid rgba(28, 39, 49, 0.1);
+                    margin-bottom: 20px;
+                    padding-bottom: 20px;
+
+    }
+
+
+    }
+</style>
+
+<section class="ftco-counter ftco-section img" id="section-counter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3 counter-wrap ftco-animate">
+                <div class="block-18">
+                    <div class="text">
+                        <strong class="number" data-number="@ViewBag.carCount">0</strong>
+                        <span>Toplam Araç</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 counter-wrap ftco-animate">
+                <div class="block-18">
+                    <div class="text">
+                        <strong class="number" data-number="@ViewBag.locationCount">0</strong>
+                        <span>Lokasyon</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 counter-wrap ftco-animate">
+                <div class="block-18">
+                    <div class="text">
+                        <strong class="number" data-number="@ViewBag.brandCount">0</strong>
+                        <span>Marka Sayısı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 counter-wrap ftco-animate">
+                <div class="block-18">
+                    <div class="text">
+                        <strong class="number" data-number="@ViewBag.carCountByFuelElectric">0</strong>
+                        <span>Elektrikli Araç</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

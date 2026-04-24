@@ -1,0 +1,12 @@
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\bin\Debug\net8.0\UdemyCarBook.Dto.deps.json
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\bin\Debug\net8.0\UdemyCarBook.Dto.dll
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\bin\Debug\net8.0\UdemyCarBook.Dto.pdb
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.csproj.AssemblyReference.cache
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.AssemblyInfoInputs.cache
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.AssemblyInfo.cs
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.csproj.CoreCompileInputs.cache
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.dll
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\refint\UdemyCarBook.Dto.dll
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.pdb
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\ref\UdemyCarBook.Dto.dll

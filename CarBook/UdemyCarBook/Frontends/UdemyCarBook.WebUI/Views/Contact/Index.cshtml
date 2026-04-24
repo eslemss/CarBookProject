@@ -1,0 +1,76 @@
+﻿@model CreateContactDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/ULayout/Index.cshtml";
+}
+<style> 
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 40px;
+} 
+</style>
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+
+            @await Component.InvokeAsync("_FooterAddressComponentPartial")
+                
+            <div class="col-md-8 block-9 mb-md-5">
+                <form class="bg-light p-5 rounded-4 shadow-sm contact-form" method="post">
+
+                    <h4 class="mb-4 fw-bold text-dark">İletişim Formu</h4>
+
+                 @*    <div class="mb-3">
+                        <label for="serviceType" class="form-label fw-semibold">Hizmet Türü</label>
+                        <select class="form-select rounded-3" id="serviceType" required>
+                            <option value="" selected disabled>Hizmet Türü Seçiniz</option>
+                            <option value="arac_kiralama">Araç Kiralama</option>
+                            <option value="rezervasyon">Rezervasyon Sorusu</option>
+                            <option value="fiyat">Fiyat Bilgisi</option>
+                            <option value="sikayet">Şikayet</option>
+                            <option value="is_birligi">İş Birliği</option>
+                            <option value="diger">Diğer</option>
+                        </select>
+                    </div> *@
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control rounded-3"
+                               placeholder="Adınız Soyadınız" asp-for="Name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="email" class="form-control rounded-3"
+                               placeholder="Email Adresiniz" asp-for="Email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control rounded-3"
+                               placeholder="Konu" asp-for="Subject" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <textarea asp-for="Message" rows="6"
+                                  class="form-control rounded-3"
+                                  placeholder="Mesajınız" required></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit"
+                                class="btn btn-dark py-3 rounded-3">
+                            Mesajı Gönder
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div id="map" class="bg-white"></div>
+            </div>
+        </div>
+    </div>
+</section>
+

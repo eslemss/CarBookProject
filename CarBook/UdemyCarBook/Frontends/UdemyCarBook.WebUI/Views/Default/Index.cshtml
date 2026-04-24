@@ -1,0 +1,378 @@
+﻿@model UdemyCarBook.Dto.LocationDtos.ResultLocationDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+
+<style>
+    :root {
+        --theme-dark: #1c2731;
+        --theme-orange: #ff9f1c;
+    }
+
+    /* MODAL TASARIMI */
+    #mapModal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.85);
+        backdrop-filter: blur(8px);
+    }
+
+    .modal-content-custom {
+        position: relative;
+        background-color: #fff;
+        margin: 3% auto;
+        padding: 25px;
+        width: 85%;
+        max-width: 1000px;
+        border-radius: 15px;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.6);
+    }
+
+    .map-container {
+        width: 100%;
+        height: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+    }
+
+    .close-map {
+        position: absolute;
+        right: 25px;
+        top: 15px;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+        transition: 0.3s;
+    }
+
+        .close-map:hover {
+            color: var(--theme-orange);
+        }
+
+    /* FORM ELEMANLARI */
+    .request-form.custom-premium .form-control {
+        background: #fff !important;
+        color: #333 !important;
+        opacity: 1 !important;
+        border: 2px solid transparent;
+        height: 45px;
+        border-radius: 5px;
+    }
+
+        .request-form.custom-premium .form-control:focus {
+            border-color: var(--theme-orange) !important;
+            outline: none;
+        }
+
+    /* LOKASYON LİSTESİ - SADE VE ÇALIŞAN HALİ */
+    #loc_id option {
+        background-color: #fff !important;
+        color: #000 !important;
+    }
+
+    .request-form.custom-premium .label {
+        color: #fff !important;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    /* BUTON */
+    .btn-premium-orange {
+        background: var(--theme-orange) !important;
+        color: #fff !important;
+        font-weight: 700;
+        height: 55px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .btn-premium-orange:hover {
+            background: #f38a00 !important;
+        }
+
+        .btn-premium-orange:disabled {
+            background: #555 !important;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+@await Component.InvokeAsync("_HeadUILayoutComponentPartial")
+<body>
+    @await Component.InvokeAsync("_NavbarUILayoutComponentPartial")
+    @await Component.InvokeAsync("_DefaultCoverUILayoutComponentPartial")
+
+    <div id="mapModal">
+        <div class="modal-content-custom">
+            <span class="close-map" id="btnCloseMap">&times;</span>
+            <h3 class="text-center mb-4" style="font-weight: 700;">Ofis Konumlarımız</h3>
+            <div class="map-container">
+                <div id="map" style="width:100%; height:100%;"></div>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-dark px-5" id="btnMapBottomClose">Haritayı Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="ftco-section ftco-no-pt bg-light">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-md-12 featured-top" style="margin-top: 80px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <form action="/CarPricing/Index/" method="get" class="request-form custom-premium" id="carRentalForm">
+                                <h2>Şimdi Aracınızı Kiralayın</h2>
+                                <div class="form-group">
+                                    <label class="label text-white">Alınacak Lokasyon</label>
+                                    @Html.DropDownList("locationId", (List<SelectListItem>)ViewBag.v, "Lokasyon Seçiniz", new { @class = "form-control", @id = "loc_id", @required = "required" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="label text-white">Bırakılacak Lokasyon</label>
+                                    @Html.DropDownList("dropOffLocationId", (List<SelectListItem>)ViewBag.v, "Dönüş Lokasyonu Seçiniz", new { @class = "form-control" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label class="label text-white">Alış Tarihi</label>
+                                        <input type="date" class="form-control" name="pickupDate" id="pick_date_custom" required onkeydown="return false">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="label text-white">Alış Saati</label>
+                                        <input type="time" class="form-control" name="pickupTime" id="pick_time_custom" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label class="label text-white">İade Tarihi</label>
+                                        <input type="date" class="form-control" name="dropoffDate" id="off_date_custom" required disabled onkeydown="return false">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="label text-white">İade Saati</label>
+                                        <input type="time" class="form-control" name="dropoffTime" id="off_time_custom" required disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-4">
+                                    <button type="submit" id="submitBtn" class="btn btn-premium-orange">Uygun Araçları Listele</button>
+                                </div>
+                                <div id="error-container" class="text-center mt-2" style="display:none;">
+                                    <small id="error-text" style="color: #ff4d4d; font-weight: bold;"></small>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-8 d-flex align-items-center">
+                            <div class="services-wrap w-100" style="background: #fff; padding: 40px; border-radius: 0 10px 10px 0;">
+                                <h3 class="mb-5 text-center" style="font-weight: 800; font-size: 28px;">Araç Kiralamanın En Basit Yolu</h3>
+                                <div class="row text-center">
+
+                                    <div class="col-md-4 clickable-icon" id="btn-open-map" style="cursor: pointer;">
+                                        <div class="icon" style="font-size: 40px; color: var(--theme-orange);"><span class="flaticon-route"></span></div>
+                                        <h3 style="font-size: 16px; font-weight: 700;">Konumu Seç</h3>
+                                        <p><small class="text-primary">Haritada Araçlarımızı Gör</small></p>
+                                    </div>
+
+                                    <div class="col-md-4" style="cursor: pointer;" onclick="location.href='/Car/Index/'">
+                                        <div class="icon" style="font-size: 40px; color: var(--theme-orange);"><span class="flaticon-handshake"></span></div>
+                                        <h3 style="font-size: 16px; font-weight: 700;">Araçları Gör</h3>
+                                        <p><small class="text-secondary">Tüm Modellerimizi İncele</small></p>
+                                    </div>
+
+                                    <div class="col-md-4" style="cursor: pointer;" onclick="location.href='/CarPricing/Index/'">
+                                        <div class="icon" style="font-size: 40px; color: var(--theme-orange);"><span class="flaticon-rent"></span></div>
+                                        <h3 style="font-size: 16px; font-weight: 700;">Hızlıca Kirala</h3>
+                                        <p><small class="text-secondary">Hemen Rezervasyon Yap</small></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @await Component.InvokeAsync("_DefaultBannerComponentPartial")
+    <script>
+        // 1. LOKASYON VERİLERİ (Görsel olmasa da hata vermeyecek şekilde yapılandırıldı)
+        const istanbulLocations = [
+            {id: 2 ,name: "Sabiha Gökçen Havalimanı", lat: 40.8986, lng: 29.3092, info: "Anadolu Yakası Hızlı Teslimat", img: "https://static.sabihagokcen.aero/files/fotogaleri/SabihaGokcenHavalimani_11.jpg" },
+            {id: 3, name: "İstanbul Havalimanı", lat: 41.2753, lng: 28.7519, info: "7/24 Kesintisiz Araç Teslimi", img: "https://www.santiye.com.tr/_medya/ctf/780/521/terminal-havadann.jpg" },
+            {id: 4, name: "Kartal Köprüsü", lat: 40.9085, lng: 29.2120, info: "Metro ve Toplu Taşıma Yakını", img: "https://yolbakim.ibb.istanbul/images/news/fullxfull/6707849534e9a-5583.jpg" },
+            {id: 5, name: "Eminönü Meydanı", lat: 41.0169, lng: 28.9719, info: "Tarihi Yarımada Teslim Noktası", img: "https://upload.wikimedia.org/wikipedia/commons/0/0e/02_03_2022_Emin%C3%B6n%C3%BC_Meydan%C4%B1.jpg" },
+            {id: 6, name: "Esenler Otogarı", lat: 41.0397, lng: 28.8942, info: "Otogar Çıkışı Hemen Teslim", img: "https://buyukistanbulotogari.ist/wp-content/uploads/2021/02/DEG%CC%86I%CC%87S%CC%A7I%CC%87M-SONRASI.jpg" }
+        ];
+
+        // 2. HARİTAYI ÇİZEN FONKSİYON
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: { lat: 41.0082, lng: 28.9784 },
+                disableDefaultUI: false, // Navigasyon araçlarını göster
+                mapTypeControl: false    // Uydu/Harita butonunu gizle (daha temiz görünüm)
+            });
+
+            const infoWindow = new google.maps.InfoWindow();
+
+            istanbulLocations.forEach(loc => {
+                const marker = new google.maps.Marker({
+                    position: { lat: loc.lat, lng: loc.lng },
+                    map: map,
+                    title: loc.name,
+                    animation: google.maps.Animation.DROP // Pinler haritaya düşerek gelsin
+                });
+
+                // Bilgi penceresi içeriği (Resim yoksa otomatik gizleyen sistem eklendi)
+                const content = `
+                    <div style="width:220px; text-align:center; font-family: 'Poppins', sans-serif; padding:10px;">
+                        <h6 style="color:#ff9f1c; font-weight:700; margin-bottom:8px; font-size:15px;">${loc.name}</h6>
+
+                        <div style="background:#f4f4f4; border-radius:8px; margin-bottom:10px; overflow:hidden; min-height:80px; display:flex; align-items:center; justify-content:center;">
+                            <img src="${loc.img}"
+                                 alt="${loc.name}"
+                                 style="width:100%; display:block;"
+                                 onerror="this.parentElement.innerHTML='<span style=\'font-size:40px; color:#ccc;\' class=\'flaticon-route\'></span>';">
+                        </div>
+
+                        <p style="font-size:12px; color:#555; line-height:1.4; margin-bottom:12px;">${loc.info}</p>
+
+                        <a href="/CarPricing/Index/" style="background:#1c2731; color:#fff; padding:8px 15px; display:block; border-radius:5px; text-decoration:none; font-size:12px; font-weight:600; transition:0.3s;">
+                            ARAÇLARI LİSTELE
+                        </a>
+                    </div>`;
+
+                marker.addListener("click", () => {
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+
+        // 3. SAYFA YÜKLENDİĞİNDE ÇALIŞACAK KISIM
+        document.addEventListener("DOMContentLoaded", function () {
+            // --- MODAL ELEMENTLERİ ---
+            const modal = document.getElementById('mapModal');
+            const openBtn = document.getElementById('btn-open-map');
+            const closeBtn = document.getElementById('btnCloseMap');
+            const bottomCloseBtn = document.getElementById('btnMapBottomClose');
+
+            // --- FORM ELEMENTLERİ ---
+            const pickDate = document.getElementById('pick_date_custom');
+            const pickTime = document.getElementById('pick_time_custom');
+            const offDate = document.getElementById('off_date_custom');
+            const offTime = document.getElementById('off_time_custom');
+            const btnSubmit = document.getElementById('submitBtn');
+            const errorContainer = document.getElementById('error-container');
+            const errorText = document.getElementById('error-text');
+
+            // --- MODAL İŞLEMLERİ ---
+            if (openBtn) {
+                openBtn.onclick = () => {
+                    modal.style.display = "block";
+                    if (typeof google !== 'undefined') {
+                        initMap();
+                    }
+                };
+            }
+
+            const closeModal = () => modal.style.display = "none";
+            if (closeBtn) closeBtn.onclick = closeModal;
+            if (bottomCloseBtn) bottomCloseBtn.onclick = closeModal;
+
+            window.onclick = (e) => {
+                if (e.target == modal) closeModal();
+            };
+
+            // --- FORM VALİDASYONU ---
+            if (pickDate) {
+                pickDate.min = new Date().toISOString().split('T')[0];
+            }
+
+            function validateForm() {
+                if (!pickDate.value || !pickTime.value || !offDate.value || !offTime.value) {
+                    btnSubmit.disabled = true;
+                    return;
+                }
+
+                const start = new Date(`${pickDate.value}T${pickTime.value}`);
+                const end = new Date(`${offDate.value}T${offTime.value}`);
+                const diffInHours = (end - start) / (1000 * 60 * 60);
+
+                let message = "";
+                let isValid = true;
+
+                if (end <= start) {
+                    message = "* İade zamanı alıştan sonra olmalı!";
+                    isValid = false;
+                } else if (diffInHours < 24) {
+                    message = "* Minimum 24 saat kiralama gereklidir!";
+                    isValid = false;
+                } else if (diffInHours > 720) {
+                    message = "* Maksimum kiralama süresi 30 gündür!";
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    errorContainer.style.display = 'block';
+                    errorText.innerHTML = message;
+                    btnSubmit.disabled = true;
+                } else {
+                    errorContainer.style.display = 'none';
+                    btnSubmit.disabled = false;
+                }
+            }
+
+            if (pickDate) {
+                pickDate.addEventListener("change", function () {
+                    if (this.value) {
+                        offDate.disabled = false;
+                        offTime.disabled = false;
+                        offDate.min = this.value;
+                        let maxD = new Date(this.value);
+                        maxD.setDate(maxD.getDate() + 30);
+                        offDate.max = maxD.toISOString().split('T')[0];
+                    }
+                    validateForm();
+                });
+            }
+
+            [pickTime, offDate, offTime].forEach(el => {
+                if (el) el.addEventListener("change", validateForm);
+            });
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    @await Component.InvokeAsync("_DefaultLast5CarsWithBrandsComponentPartial")
+
+    @await Component.InvokeAsync("_AboutUsComponentPartial")
+
+    @await Component.InvokeAsync("_ServiceComponentPartial")
+
+    @await Component.InvokeAsync("_BecomeADriveComponentPartial")
+
+    @await Component.InvokeAsync("_TestimonialComponentsPartial")
+
+    @await Component.InvokeAsync("_GetLast3BlogsWithAuthorListComponentPartial")
+
+    @await Component.InvokeAsync("_DefaultStatisticsComponentPartial")
+
+    @await Component.InvokeAsync("_FooterUlLayoutComponentPartial")
+
+    @await Component.InvokeAsync("_ScriptUILayoutComponentPartial")
+</body>
+</html>

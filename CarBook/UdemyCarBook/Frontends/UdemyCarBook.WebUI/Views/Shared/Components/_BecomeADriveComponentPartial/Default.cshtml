@@ -1,0 +1,98 @@
+﻿<style>
+    /* 1. Ana Section Ayarları */
+    .ftco-intro-custom {
+        position: relative;
+        background-attachment: fixed !important; /* Parallax efekti verir, çok daha profesyonel durur */
+        overflow: hidden;
+    }
+
+        /* 2. Overlay (Yeşili siliyoruz, modern bir koyuluk katıyoruz) */
+        .ftco-intro-custom .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Soldan sağa doğru bir karartma, görselin detaylarını korur */
+            background: linear-gradient(to right, rgba(28, 39, 49, 0.2), rgba(28, 39, 49, 0.8)) !important;
+            opacity: 1 !important;
+        }
+
+    /* 3. Yazı Alanı ve Modern Kutu Efekti */
+    .intro-content-box {
+        background: rgba(255, 255, 255, 0.05); /* Çok hafif şeffaf beyaz */
+        backdrop-filter: blur(10px); /* Arkayı hafif bulanıklaştırır (Cam efekti) */
+        padding: 50px;
+        border-radius: 20px;
+        border-left: 5px solid #ff9f1c; /* Sol tarafa turuncu marka çizgisi */
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    }
+
+    /* 4. Başlık ve Metin */
+    .ftco-intro-custom h2 {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        font-size: 42px !important;
+        line-height: 1.2;
+        letter-spacing: -1px;
+        margin-bottom: 25px !important;
+        font-style: normal !important; /* Eğikliği kaldırdık */
+    }
+
+    /* 5. Buton: Premium Turuncu */
+    .btn-custom-intro {
+        background: #ff9f1c !important;
+        border: 2px solid #ff9f1c !important;
+        color: #1c2731 !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 15px 35px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        display: inline-block;
+    }
+
+        .btn-custom-intro:hover {
+            background: transparent !important;
+            color: #ff9f1c !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 159, 28, 0.3);
+        }
+
+    /* Mobil Düzenleme */
+    @@media (max-width: 767.98px) {
+        .intro-content-box {
+            padding: 30px;
+            text-align: center;
+            border-left: none;
+            border-top: 5px solid #ff9f1c;
+        }
+
+
+        .ftco-intro-custom h2 {
+            font-size: 30px !important;
+        }
+    }
+</style>
+
+<section class="ftco-section ftco-intro ftco-intro-custom"
+         style="background: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2083&auto=format&fit=crop') center center / cover no-repeat; padding:150px 0;">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-7 col-lg-6 ftco-animate">
+                <div class="intro-content-box">
+                    <h2 class="mb-4">Profesyonel Sürüş Desteğiyle <br> Güvenle Tanışın.</h2>
+                    <p class="mb-5" style="color: rgba(255,255,255,0.8); font-size: 18px;">
+                        Yolculuğun her anında yanınızdayız. En iyi araçlar ve profesyonel ekibimizle tanışmak için bir adım atın.
+                    </p>
+                    <a href="/Car/Index/" class="btn-custom-intro">
+                        Hemen Rezervasyon Yap
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

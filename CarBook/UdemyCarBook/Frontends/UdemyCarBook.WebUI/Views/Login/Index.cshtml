@@ -1,0 +1,205 @@
+﻿@model UdemyCarBook.Dto.LoginDtos.CreateLoginDto
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CarBook - Giriş Yap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="~/Admin/vertical/assets/images/favicon.ico">
+
+    <link href="~/Admin/vertical/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Admin/vertical/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Admin/vertical/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        :root {
+            --main-orange: #ff9f1c;
+            --dark-blue: #2c3e50;
+        }
+
+        body {
+            background-color: #f4f7f6;
+        }
+
+        .bg-login {
+            background-image: url('https://images.pexels.com/photos/315938/pexels-photo-315938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            min-height: 100% !important;
+            filter: brightness(0.7);
+            border-radius: 15px 0 0 15px;
+        }
+
+        .login-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .btn-premium {
+            background-color: var(--main-orange) !important;
+            border: none !important;
+            color: #fff !important;
+            font-weight: 700;
+            padding: 12px;
+            transition: 0.3s;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            .btn-premium:hover {
+                background-color: #e68a00 !important;
+                box-shadow: 0 5px 15px rgba(255, 159, 28, 0.4);
+                transform: translateY(-1px);
+            }
+
+        .form-control-user {
+            border-radius: 8px !important;
+            padding: 1.5rem 1rem !important;
+            border: 1px solid #e1e1e1;
+            transition: 0.3s;
+        }
+
+            .form-control-user:focus {
+                border-color: var(--main-orange);
+                box-shadow: 0 0 0 0.2rem rgba(255, 159, 28, 0.1);
+            }
+
+        .brand-logo {
+            color: var(--dark-blue);
+            font-weight: 800;
+            font-size: 26px;
+            letter-spacing: -1px;
+        }
+
+            .brand-logo span {
+                color: var(--main-orange);
+            }
+
+        .social-list-item {
+            height: 35px;
+            width: 35px;
+            line-height: 33px;
+            border: 1px solid #eee;
+            border-radius: 50%;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+            .social-list-item:hover {
+                background-color: var(--dark-blue);
+                color: #fff !important;
+                border-color: var(--dark-blue);
+            }
+
+        .text-orange {
+            color: var(--main-orange) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-11">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg login-card my-5">
+                            <div class="row">
+                                <div class="col-lg-5 d-none d-lg-block bg-login"></div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-4">
+                                            <a href="/Default/Index/" class="brand-logo">
+                                                <i class="mdi mdi-car-sports text-orange"></i> Car<span>Book</span>
+                                            </a>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h1 class="h4 mb-1 font-weight-bold" style="color: var(--dark-blue);">Tekrar Hoş Geldin!</h1>
+                                            <p class="text-muted">Lütfen devam etmek için hesabınıza giriş yapın.</p>
+                                        </div>
+
+                                        @* Dönüş adresini (returnUrl) taşıyan form *@
+                                        <form class="user" method="post" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                                            <div class="form-group mb-3">
+                                                <input type="text" class="form-control form-control-user" placeholder="Kullanıcı Adınız" asp-for="Username" required>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <input type="password" class="form-control form-control-user" placeholder="Şifreniz" asp-for="Password" required>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-premium btn-block shadow-sm">
+                                                Giriş Yap <i class="mdi mdi-login-variant ml-2"></i>
+                                            </button>
+                                        </form>
+
+                                        <div class="text-center mt-5">
+                                            <h6 class="text-muted font-size-13 text-uppercase mb-3">Veya Şunlarla Giriş Yap</h6>
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item">
+                                                    <a href="javascript: void(0);" class="social-list-item text-primary"><i class="mdi mdi-facebook"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="javascript: void(0);" class="social-list-item text-danger"><i class="mdi mdi-google"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="javascript: void(0);" class="social-list-item text-info"><i class="mdi mdi-twitter"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="row mt-5">
+                                            <div class="col-12 text-center">
+                                                <p class="text-muted mb-2"><a href="#" class="text-muted small">Şifrenizi mi unuttunuz?</a></p>
+
+                                                @* ReturnUrl bilgisini link ile Kayıt Ol sayfasına taşıyoruz *@
+                                                <p class="text-muted mb-0">
+                                                    Bir hesabınız yok mu?
+                                                    <a href="/Register/CreateAppUser?returnUrl=@ViewBag.ReturnUrl" class="font-weight-bold text-orange ml-1">Kayıt Ol</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Admin/vertical/assets/js/jquery.min.js"></script>
+    <script src="~/Admin/vertical/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Admin/vertical/assets/js/metismenu.min.js"></script>
+    <script src="~/Admin/vertical/assets/js/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (TempData["LoginError"] != null)
+    {
+        <script>
+            Swal.fire({
+                title: 'Hesabınız Bulunamadı',
+                text: 'Girdiğiniz bilgilerle eşleşen bir kullanıcı yok. Araç kiralamak için üye olmak ister misiniz?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff9f1c',
+                cancelButtonColor: '#2c3e50',
+                confirmButtonText: 'Evet, Kayıt Ol',
+                cancelButtonText: 'Tekrar Dene',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Register/CreateAppUser?returnUrl=@ViewBag.ReturnUrl";
+                }
+            });
+        </script>
+    }
+</body>
+</html>

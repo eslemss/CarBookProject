@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadUILayoutComponentPartial")
+
+<body>
+    @await Component.InvokeAsync("_NavbarUILayoutComponentPartial")
+
+    @await Component.InvokeAsync("_MainCoverUILayoutComponentPartial")
+
+    @RenderBody()
+
+    @await Component.InvokeAsync("_FooterUlLayoutComponentPartial")
+
+    @await Component.InvokeAsync("_ScriptUILayoutComponentPartial")
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function showLoginWarning() {
+            let timerInterval;
+            Swal.fire({
+                title: 'Üyelik Gerekiyor',
+                html: 'Araç kiralamak için üye olmanız gerekmektedir. <br><br> <b>5</b> saniye içinde giriş sayfasına yönlendiriliyorsunuz...',
+                timer: 5000,
+                timerProgressBar: true,
+                confirmButtonColor: '#ff9800',
+                confirmButtonText: 'Hemen Giriş Yap',
+                didOpen: () => {
+                    Swal.showLoading();
+                    const b = Swal.getHtmlContainer().querySelector('b');
+                    timerInterval = setInterval(() => {
+                        b.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                // Mevcut sayfanın tam yolunu (QueryString dahil) alıyoruz
+                const currentPath = window.location.pathname + window.location.search;
+
+                // Login sayfasına returnUrl ile gönderiyoruz
+                window.location.href = "/Login/Index?returnUrl=" + encodeURIComponent(currentPath);
+            });
+        }
+    </script>
+</body>
+</html>

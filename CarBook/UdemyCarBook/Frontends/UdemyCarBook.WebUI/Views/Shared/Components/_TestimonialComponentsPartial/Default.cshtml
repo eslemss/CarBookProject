@@ -1,0 +1,155 @@
+﻿@model List<UdemyCarBook.Dto.TestimonialDtos.ResulTestimonialDto>
+
+<style>
+    /* Kartların modern ve stabil görünümü */
+    .custom-testimonial-section .testimony-wrap {
+        min-height: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Yorumların yazıldığı gibi (alt alta) görünmesini sağlar */
+    .testimony-wrap .text p {
+        white-space: pre-line;
+        word-wrap: break-word;
+    }
+
+    .user-img {
+        width: 85px !important;
+        height: 85px !important;
+        border-radius: 18px;
+        margin: 0 auto 20px;
+        background-size: cover;
+        background-position: center center;
+        border: 3px solid #f8f9fa;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .add-comment-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center !important;
+        height: 100%;
+    }
+</style>
+
+<section class="ftco-section testimony-section custom-testimonial-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Müşteri Memnuniyeti</span>
+                <h2 class="mb-3">Sizden Gelenler</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel ftco-owl">
+                    @foreach (var item in Model)
+                    {
+                        <div class="item">
+                            <div class="testimony-wrap text-center">
+                                <div class="quote-icon"><i class="fa fa-quote-right"></i></div>
+                                <div class="user-img" style="background-image: url(@item.ImageUrl)"></div>
+                                <div class="text">
+                                    <p>“@item.Comment”</p>
+                                    <p class="name">@item.Name</p>
+                                    <span class="position">@item.Title</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="item">
+                        <div class="testimony-wrap text-center add-comment-wrap" style="border: 2px dashed #ff9f1c; background: rgba(255,159,28,0.05) !important;">
+                            <div>
+                                <div class="user-img d-flex align-items-center justify-content-center" style="background-color: #eee; margin: 0 auto 20px;">
+                                    <i class="fa fa-plus" style="font-size: 30px; color: #ff9f1c;"></i>
+                                </div>
+                                <div class="text">
+                                    <p class="mb-4" style="font-style: normal; color: #1c2731; font-weight: 600;">
+                                        Sizin deneyiminiz bizim için değerli!
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#addCommentModal" class="btn btn-warning px-4 py-3" style="border-radius: 20px; font-weight: bold; color:white;">
+                                            Görüşünü Bildir
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 20px; border: none;">
+            <div class="modal-header" style="background: #ff9f1c; color: white; border-radius: 20px 20px 0 0;">
+                <h5 class="modal-title" style="font-weight: 800;">Deneyiminizi Paylaşın</h5>
+                <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <form id="commentForm" action="/Default/AddTestimonial" method="post" enctype="multipart/form-data">
+                <div class="modal-body p-4">
+                    <div class="form-group mb-3">
+                        <label style="font-weight:600;">Adınız Soyadınız</label>
+                        <input type="text" name="Name" class="form-control" placeholder="Örn: Ahmet Yılmaz" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label style="font-weight:600;">Mesleğiniz / Ünvanınız</label>
+                        <input type="text" name="Title" class="form-control" placeholder="Örn: Yazılım Mühendisi" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label style="font-weight:600;">Profil Fotoğrafı</label>
+                        <input type="file" name="ImageFile" class="form-control-file d-block" accept="image/*">
+                    </div>
+                    <div class="form-group mb-0">
+                        <label style="font-weight:600;">Yorumunuz</label>
+                        <textarea id="commentTextArea" name="Comment" class="form-control" rows="6" placeholder="Bize sunduğumuz hizmet hakkındaki düşüncelerinizi yazın..." required style="white-space: pre-wrap;"></textarea>
+                        <div class="d-flex justify-content-between mt-2">
+                            <small class="text-muted">Maksimum 250 karakter</small>
+                            <small id="charCountLabel" class="text-muted">0 / 250</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border: none;">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-warning text-white" style="font-weight: 700;">Geri Bildirimi Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const textarea = document.getElementById('commentTextArea');
+        const charLabel = document.getElementById('charCountLabel');
+        const form = document.getElementById('commentForm');
+
+        // Her tuşa basıldığında veya metin değiştiğinde anında çalışır
+        textarea.addEventListener('input', function () {
+            const currentLength = this.value.length;
+            charLabel.innerText = `${currentLength} / 250`;
+
+            if (currentLength > 250) {
+                charLabel.style.color = "red";
+                charLabel.style.fontWeight = "bold";
+            } else {
+                charLabel.style.color = "#6c757d";
+                charLabel.style.fontWeight = "normal";
+            }
+        });
+
+        // Form gönderilirken son kontrol
+        form.addEventListener('submit', function (e) {
+            if (textarea.value.length > 250) {
+                alert("Lütfen yorumunuzu 250 karakteri geçmeyecek şekilde düzenleyin.");
+                e.preventDefault();
+            }
+        });
+    });
+</script>

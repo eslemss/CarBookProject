@@ -1,0 +1,78 @@
+﻿<style>
+    /* Modern Sidebar Kart Tasarımı */
+    .custom-sidebar-card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Yumuşak gölge */
+        border: none;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+        .custom-sidebar-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .custom-sidebar-card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+            /* Başlık altındaki küçük turuncu çizgi */
+            .custom-sidebar-card h3::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+                height: 3px;
+                background: #ff9800;
+                border-radius: 2px;
+            }
+
+        .custom-sidebar-card p {
+            color: #7f8c8d;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+    /* Temadaki turuncu butonla tam uyum */
+    .btn-sidebar-action {
+        background-color: #ff9800;
+        color: #ffffff;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 1px;
+        display: inline-block;
+        border: none;
+        transition: 0.3s;
+        width: 100%; /* Kutuyu doldurması için */
+    }
+
+        .btn-sidebar-action:hover {
+            background-color: #e68a00;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="sidebar-box ftco-animate">
+    <div class="custom-sidebar-card">
+        <h3>Yola Çıkmaya Hazır Mısın?</h3>
+        <p>Hayalindeki aracı en uygun fiyatlarla kiralamak için beklemene gerek yok. Hemen araç listemize göz at ve sana özel fırsatları kaçırma!</p>
+        <a href="/Car/Index" class="btn-sidebar-action">
+            Araçları Listele <span class="icon-long-arrow-right ml-2"></span>
+        </a>
+    </div>
+</div>
