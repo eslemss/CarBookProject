@@ -67,7 +67,6 @@ Bu sorgulama sonucunda:
 
 Bu kapsamlı kontroller sayesinde, hem veritabanı bütünlüğü korunmakta hem de kullanıcıların rezervasyon süreçleri akıllı yönlendirmelerle daha hızlı ve hatasız tamamlanmaktadır.
 "💰 Dinamik Fiyatlandırma ve Araç Paketleri: Veritabanında kayıtlı Araç nesnelerinin günlük, haftalık ve aylık kiralama opsiyonlarıyla listelendiği detaylı fiyatlandırma ekranı. Sistem, her bir aracın yakıt/vites gibi teknik özelliklerini (attributes) ve çoklu fiyat tarifelerini dinamik olarak çekerken, 'Hemen Kirala' butonu üzerinden seçilen araç verisini doğrudan Kiralama formuna (Data Binding) aktarır."
-<img width="1920" height="443" alt="Ekran görüntüsü 2026-05-15 232341" src="https://github.com/user-attachments/assets/61558514-59cc-4005-898c-24804892c5e4" />
 
 <img width="651" height="967" alt="onay" src="https://github.com/user-attachments/assets/1c55c102-1efc-4e7f-876c-9f06c3ef20f3" />
 <img width="649" height="977" alt="hata" src="https://github.com/user-attachments/assets/7c6be2d0-6fec-4121-aff8-acfc07def807" />
