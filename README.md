@@ -78,6 +78,8 @@ Dinamik Entegrasyon: Profil sayfasında güncellenen bilgiler, rezervasyon formu
 Veri Güvenliği: Kullanıcı bilgileri veritabanı seviyesinde korunmakta ve sadece yetkili kullanıcıların kendi bilgilerine erişimine izin verilmektedir.
 
 ⚡ Asenkron İş Akışı: Admin panelinden gerçekleştirilen rezervasyon onay işlemleri asenkron bir yapıda kurgulanmıştır. Bu durum, sistemin ölçeklenebilirliğini artırırken kullanıcı tarafına yansıyan bilgilerin tutarlılığını ve hızını garanti eder.
+<img width="1920" height="443" alt="Ekran görüntüsü 2026-05-15 232341" src="https://github.com/user-attachments/assets/5210533a-eb46-4bb4-bc57-4fdec790c206" />
+
 <img width="1886" height="769" alt="düzenleprofil" src="https://github.com/user-attachments/assets/433cbd7f-ea07-4928-8271-3e420c0d9cfa" />
 
  ✒️Full CRUD & Admin Management: Proje, admin tarafında rezervasyonlar üzerinde tam CRUD (Create, Read, Update, Delete) yetkisi sunar. Asenkron durum yönetimi (Async State Management) sayesinde operasyonel işlemler kesintisiz ve yüksek performansla gerçekleştirilir.
