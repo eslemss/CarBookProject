@@ -20,7 +20,8 @@ Proje, gerçek dünya senaryolarını kod ortamına aktarmak amacıyla birbiriyl
 ### 1. `Araç` Sınıfı
 Filoda bulunan araçların güncel durumlarını, teknik bilgilerini ve uygunluk statülerini yöneten ana sınıftır.
 * **Özellikler (Attributes):**
-  * `arac_id`: Aracı sistemde benzersiz kılan kimlik/plaka numarası.
+  * `arac_id`: Aracı sistemde benzersiz kılan kimlik/plaka numarası<img width="1920" height="443" alt="Ekran görüntüsü 2026-05-15 232341" src="https://github.com/user-attachments/assets/cb8956b2-2a98-4fd4-919a-17b6ecf41977" />![Uploading Ekran görüntüsü 2026-05-15 232341.png…]()
+
   * `marka` & `model`: Aracın marka ve model bilgileri.
   * `kilometre`: Aracın güncel kilometre bilgisi.
 * **Metotlar (Methods):**
