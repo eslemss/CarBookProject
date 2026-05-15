@@ -145,9 +145,6 @@ Veri Güvenliği: Kullanıcı bilgileri veritabanı seviyesinde korunmakta ve sa
 <img width="1600" height="412" alt="WhatsApp Image 2026-05-03 at 22 57 19" src="https://github.com/user-attachments/assets/5d08b86c-8d38-46de-bba6-4a94212df18d" />
 
 
-📝 Esnek Operasyon ve Kayıt Revizyonu: Gerçek dünya senaryolarında sıkça karşılaşılan müşteri talebi değişikliklerini (farklı bir araç isteme, lokasyon veya saat değiştirme) yönetmek için tasarlanmış detaylı kontrol formu. Bu modül, işletmeye operasyonel esneklik sağlayarak; kaydı tamamen silip yeniden oluşturmak yerine, mevcut kiralama döngüsü içinde hızlı ve güvenli revizyon yapılmasına olanak tanır.
-<img width="1600" height="854" alt="WhatsApp Image 2026-05-03 at 22 55 29" src="https://github.com/user-attachments/assets/7bfd18df-22d9-4cef-b115-535e41894de7" />
-
 
 
 
