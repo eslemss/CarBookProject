@@ -1,3 +1,14 @@
+ ⚠️ ÖNEMLİ PROJE TESLİM NOTU
+
+Hocam Merhaba, 
+Sistem üzerinden tek bir link teslim edilebildiği için bu alanı iki projemi de size sunmak adına bir köprü olarak düzenledim. Bu dönem hazırladığım iki farklı projenin detayları ve kaynak kodları aşağıdadır:
+
+1. **CarBook (Araç Kiralama Sistemi):** Şu an bulunduğunuz bu depoda yer almaktadır.
+2. **Yemek Tarifi Platformu:** Bu projemin tüm kaynak kodlarına ve detaylarına aşağıdaki bağlantıdan ulaşabilirsiniz:
+    [Yemek Tarifi Platformu GitHub Deposu](https://github.com/eslemss/Yemek-Tarif-Platformu)
+
+Değerlendirmeniz için teşekkür ederim.
+
 # 🚗 Proje 1: Araç Paylaşım Sistemi (Car Sharing System)
 
 Bu proje, kullanıcıların sistemdeki uygun araçları saatlik olarak kiralayabildiği dinamik bir **Araç Paylaşım Sistemi** simülasyonudur. Sistem analizi ve Nesne Yönelimli Programlama (OOP) prensipleri merkeze alınarak; araç yönetimi, kullanıcı doğrulama ve kiralama süreçlerinin güvenli ve modüler bir yapıda çalışması hedeflenmiştir.
