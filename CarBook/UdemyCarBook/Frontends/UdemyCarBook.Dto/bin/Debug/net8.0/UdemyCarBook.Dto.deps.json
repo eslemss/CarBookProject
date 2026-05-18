@@ -9,7 +9,9 @@
       "UdemyCarBook.Dto/1.0.0": {
         "dependencies": {
           "MediatR": "14.0.0",
-          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Newtonsoft.Json": "13.0.4",
+          "UdemyCarBook.Domain": "1.0.0"
         },
         "runtime": {
           "UdemyCarBook.Dto.dll": {}
@@ -119,6 +121,14 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.4": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/10.0.0": {
         "runtime": {
           "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
@@ -132,6 +142,17 @@
           "lib/netcoreapp3.0/System.IO.Pipelines.dll": {
             "assemblyVersion": "5.0.0.1",
             "fileVersion": "5.0.1522.11506"
+          }
+        }
+      },
+      "UdemyCarBook.Domain/1.0.0": {
+        "dependencies": {
+          "MediatR": "14.0.0"
+        },
+        "runtime": {
+          "UdemyCarBook.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -213,6 +234,13 @@
       "path": "microsoft.identitymodel.tokens/8.14.0",
       "hashPath": "microsoft.identitymodel.tokens.8.14.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/13.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A==",
+      "path": "newtonsoft.json/13.0.4",
+      "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
+    },
     "System.Diagnostics.DiagnosticSource/10.0.0": {
       "type": "package",
       "serviceable": true,
@@ -226,6 +254,11 @@
       "sha512": "sha512-Iew+dfa6FFiyvWBdRmXApixRY1db+beyutpIck4SOSe0NLM8FD/7AD54MscqVLhvfSMLHO7KadjTRT7fqxOGTA==",
       "path": "system.io.pipelines/5.0.2",
       "hashPath": "system.io.pipelines.5.0.2.nupkg.sha512"
+    },
+    "UdemyCarBook.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

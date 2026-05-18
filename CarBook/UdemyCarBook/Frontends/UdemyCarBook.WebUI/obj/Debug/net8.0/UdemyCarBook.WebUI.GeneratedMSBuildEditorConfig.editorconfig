@@ -78,6 +78,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5CbG9nXFVwZGF0ZUJsb2cuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Areas/Admin/Views/AdminBooking/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5Cb29raW5nXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Areas/Admin/Views/AdminBooking/UpdateReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5Cb29raW5nXFVwZGF0ZVJlc2VydmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Areas/Admin/Views/AdminCarFeatureDetail/CreateFeatureByCarId.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5DYXJGZWF0dXJlRGV0YWlsXENyZWF0ZUZlYXR1cmVCeUNhcklkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -194,6 +202,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/AdminBooking/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Cb29raW5nXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/AdminBrand/CreateBrand.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5CcmFuZFxDcmVhdGVCcmFuZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -298,12 +310,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/MyReservation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlSZXNlcnZhdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/Profile/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxFZGl0UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/Register/CreateAppUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcQ3JlYXRlQXBwVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/RentACarList/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVudEFDYXJMaXN0XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/Reservation/CreateReservationForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ3JlYXRlUmVzZXJ2YXRpb25Gb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/Reservation/EditReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRWRpdFJlc2VydmF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/gokha/OneDrive/Desktop/eslemstajyer/UdemyCarBook/Frontends/UdemyCarBook.WebUI/Views/Reservation/Index.cshtml]

@@ -1,0 +1,79 @@
+﻿@model List<UdemyCarBook.Dto.ReservationDtos.ResultReservationDto>
+
+@{
+    ViewData["Title"] = "Gelen Rezervasyonlar";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Rezervasyon Yönetimi</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Gelen Rezervasyon İstekleri</div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Müşteri</th>
+                                <th>Araç</th>
+                                <th>Telefon</th>
+                                <th>E-mail</th>
+                                <th>Durum</th>
+                                <th class="text-center">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@item.Name @item.Surname</td>
+                                        <td>@(string.IsNullOrEmpty(item.CarName) ? "Belirtilmedi" : item.CarName)</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Email</td>
+                                        <td>
+                                            @if (item.Status == "Onaylandı")
+                                            {
+                                                <span class="badge badge-success">@item.Status</span>
+                                            }
+                                            else if (item.Status == "İptal Edildi")
+                                            {
+                                                <span class="badge badge-danger">@item.Status</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-info">@item.Status</span>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            @* Rotaları Controller'daki [Route("Admin/Reservation")] tanımına göre güncelledik *@
+                                            <a href="/Admin/Reservation/ApproveReservation/@item.ReservationID" class="btn btn-outline-success btn-sm">Onayla</a>
+                                            <a href="/Admin/Reservation/CancelReservation/@item.ReservationID" class="btn btn-outline-danger btn-sm">İptal Et</a>
+                                            <a href="/Admin/Reservation/UpdateReservation/@item.ReservationID" class="btn btn-outline-warning btn-sm">Güncelle</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center text-danger">Henüz bir rezervasyon kaydı bulunmamaktadır.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

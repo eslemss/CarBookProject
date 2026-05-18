@@ -22,6 +22,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Araç Kirala</th>
                                         <th>Marka</th>
                                         <th>Model</th>
                                         <th>Vites Türü</th>
@@ -40,6 +41,11 @@
                                         count++;
                                         <tr>
                                             <th scope="row">@count</th>
+                                            <td>
+                                                <a href="/Admin/AdminReservation/CreateReservation/@item.CarID" class="btn btn-outline-primary">
+                                                    <i class="fas fa-key"></i> Araç Kirala
+                                                </a>
+                                            </td>
                                             <td>@item.BrandName</td>
                                             <td>@item.Model</td>
                                             <td>@item.Transmission</td>

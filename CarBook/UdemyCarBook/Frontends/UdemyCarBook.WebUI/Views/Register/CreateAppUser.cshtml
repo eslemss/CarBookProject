@@ -23,6 +23,8 @@
             background-color: #ff9f1c;
             border: none;
             color: white;
+            font-weight: bold;
+            padding: 12px;
         }
 
             .btn-custom:hover {
@@ -44,34 +46,50 @@
                                 <div class="col-lg-7">
                                     <div class="p-5">
                                         <div class="text-center mb-5">
-                                            <a href="/Default/Index/" class="text-dark font-size-22 font-family-secondary">
-                                                <i class="mdi mdi-alpha-x-circle"></i> <b>CarBook</b>
+                                            <a href="/Default/Index/" class="text-dark font-size-22">
+                                                <i class="mdi mdi-car-sports text-warning"></i> <b>Car<span>Book</span></b>
                                             </a>
                                         </div>
                                         <h1 class="h5 mb-1">Aramıza Katıl!</h1>
                                         <p class="text-muted mb-4">Hemen üye ol ve hayalindeki aracı kiralamaya baş.</p>
 
                                         <form class="user" method="post">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Kullanıcı Adınız" asp-for="Username">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="E-posta Adresiniz" asp-for="Email">
-                                            </div>
+                                            @* Ad ve Soyad Yan Yana *@
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control" placeholder="Şifre" asp-for="Password">
+                                                    <input type="text" class="form-control" placeholder="Adınız" asp-for="Name" required>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" placeholder="Adınız" asp-for="Name">
+                                                    <input type="text" class="form-control" placeholder="Soyadınız" asp-for="Surname" required>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-custom btn-block waves-effect waves-light"> Kayıt Ol </button>
+
+                                            @* Kullanıcı Adı *@
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Kullanıcı Adınız" asp-for="Username" required>
+                                            </div>
+
+                                            @* E-posta *@
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="E-posta Adresiniz" asp-for="Email" required>
+                                            </div>
+
+                                            @* Şifre *@
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Şifreniz" asp-for="Password" required>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-custom btn-block waves-effect waves-light shadow-sm">
+                                                Kayıt Ol <i class="mdi mdi-account-plus ml-1"></i>
+                                            </button>
                                         </form>
 
                                         <div class="row mt-4">
                                             <div class="col-12 text-center">
-                                                <p class="text-muted mb-0">Zaten bir hesabın var mı? <a href="/Login/Index/" class="text-muted font-weight-medium ml-1"><b>Giriş Yap</b></a></p>
+                                                <p class="text-muted mb-0">
+                                                    Zaten bir hesabın var mı?
+                                                    <a href="/Login/Index/" class="text-warning font-weight-bold ml-1">Giriş Yap</a>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

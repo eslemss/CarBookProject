@@ -38,6 +38,9 @@ using UdemyCarBook.Persistence.Repositories.ReviewRepositories;
 using UdemyCarBook.Persistence.Repositories.StatisticsRepositories;
 using UdemyCarBook.Persistence.Repositories.TagCloudRepositories;
 using UdemyCarBook.WebApi.Hubs;
+using UdemyCarBook.Application.Interfaces.ReservationInterfaces;
+using UdemyCarBook.Persistence.Repositories.ReservationRepositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -88,13 +91,16 @@ builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // MediatR Kaydý (TypeLoadException Çözümü)
+// Önce Repository'yi kaydet
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+
+// Sonra MediatR'ý kaydet
 builder.Services.AddMediatR(cfg => {
-    // Handler'larýn olduðu Application assembly'sini tarýyoruz
     cfg.RegisterServicesFromAssembly(typeof(UdemyCarBook.Application.Services.ServiceRegistiration).Assembly);
 });
-
 // CQRS Handlers
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
@@ -135,10 +141,17 @@ builder.Services.AddScoped<UpdateContactCommandHandler>();
 builder.Services.AddScoped<RemoveContactCommandHandler>();
 #endregion
 
-builder.Services.AddControllers().AddFluentValidation(x =>
-{
-    x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-});
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Sonsuz döngüleri (Car -> Reservation -> Car) engeller
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.WriteIndented = true;
+    })
+    .AddFluentValidation(x =>
+    {
+        x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

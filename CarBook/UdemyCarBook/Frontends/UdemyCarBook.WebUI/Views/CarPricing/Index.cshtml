@@ -187,12 +187,11 @@
                         <div class="card-action-col">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                @* Giriş yapmışsa: ID ve Arama Kriterlerini (queryParams) beraber gönderiyoruz *@
-                                <a href="/Reservation/Index/@item.CarID@queryParams" class="btn-rent-card">Hemen Kirala</a>
+                                @* HATA DÜZELTİLDİ: Index yerine CreateReservation yazıldı *@
+                                <a href="/Reservation/CreateReservation/@item.CarID@queryParams" class="btn-rent-card">Hemen Kirala</a>
                             }
                             else
                             {
-                                @* Giriş yapmamışsa: Layout'taki o 5 saniyelik uyarıyı tetikliyoruz *@
                                 <a href="javascript:void(0);" onclick="showLoginWarning()" class="btn-rent-card">Hemen Kirala</a>
                             }
                         </div>

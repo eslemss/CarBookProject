@@ -20,7 +20,7 @@
         color: #1c2731 !important;
         font-weight: 600;
         font-size: 15px;
-        padding: 10px 20px !important;
+        padding: 10px 15px !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
     }
@@ -32,27 +32,19 @@
             width: 0;
             height: 2px;
             bottom: 5px;
-            left: 20px;
+            left: 15px;
             background-color: #ff9f1c;
             transition: width 0.3s ease;
         }
 
     .navbar-nav .nav-item:hover .nav-link::after,
     .navbar-nav .nav-item.active .nav-link::after {
-        width: calc(100% - 40px);
+        width: calc(100% - 30px);
     }
 
     /* Aktif Durumu */
     .navbar-nav .nav-item.active .nav-link {
         color: #ff9f1c !important;
-        transform: translateY(-1px);
-    }
-
-    /* Mobil Menü Butonu */
-    .navbar-toggler {
-        border: none !important;
-        background: #1c2731 !important;
-        padding: 8px 12px;
     }
 
     /* Kullanıcı Bölümü Özel Stilleri */
@@ -64,19 +56,14 @@
     }
 
     .logout-nav {
-        color: #e74c3c !important; /* Soft kırmızı */
+        color: #e74c3c !important;
     }
-
-        .logout-nav:hover {
-            background: rgba(231, 76, 60, 0.1);
-            border-radius: 5px;
-        }
 
     .login-nav {
         color: #ff9f1c !important;
         border: 2px solid #ff9f1c;
         border-radius: 5px;
-        padding: 8px 20px !important;
+        padding: 8px 18px !important;
         margin-left: 10px;
     }
 
@@ -85,6 +72,9 @@
             color: #fff !important;
         }
 </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar" id="ftco-navbar">
     <div class="container">
         <a class="navbar-brand" href="/Default/Index/" style="font-weight: 900; text-transform: uppercase; color: #1c2731;">
@@ -92,7 +82,7 @@
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu" style="color: #fff;"></span>
+            <span class="fa fa-bars" style="color: #1c2731;"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
@@ -106,21 +96,23 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @* BURAYA EKLEDİK: Sadece Admin rolündeyse bu buton görünür *@
-                    @if (User.Claims.Any(x => x.Value == "Admin"))
+                    @* Rol bazlı kontrolün en sağlam hali *@
+                    if (User.IsInRole("Admin") || User.Claims.Any(x => x.Type == System.Security.Claims.ClaimTypes.Role && x.Value == "Admin"))
                     {
                         <li class="nav-item">
                             <a href="/Admin/AdminStatistics/Index" class="nav-link" style="color: #ff9f1c !important; font-weight: bold; border: 2px solid #ff9f1c; border-radius: 5px; padding: 5px 15px !important; margin-right: 10px; margin-top: 2px;">
-                                <i class="fa fa-user-shield"></i> ADMİN PANELİ
+                                <i class="fa fa-user-shield"></i> ADMİN
                             </a>
                         </li>
                     }
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link user-name-nav">
-                            <i class="mdi mdi-account-circle"></i> @User.Identity.Name
+                        <a href="/Profile/Index/" class="nav-link user-name-nav">
+                            <i class="fa fa-user-circle"></i>
+                            @(User.Identity.IsAuthenticated? User.Identity.Name : "Profilim")
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="/Login/Logout/" class="nav-link logout-nav">Çıkış Yap</a>
                     </li>
@@ -139,23 +131,24 @@
     </div>
 </nav>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.navbar-nav .nav-item');
+<div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentPath = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-item');
 
-        navLinks.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                const linkHref = link.getAttribute('href');
+            navLinks.forEach(item => {
+                const link = item.querySelector('a');
+                if (link) {
+                    const linkHref = link.getAttribute('href').toLowerCase();
 
-                // Active sınıfı mantığı
-                if (currentPath === linkHref || (currentPath === "/" && linkHref === "/Default/Index/")) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
+                    if (currentPath === linkHref || (currentPath === "/" && linkHref === "/default/index/")) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
+</div>

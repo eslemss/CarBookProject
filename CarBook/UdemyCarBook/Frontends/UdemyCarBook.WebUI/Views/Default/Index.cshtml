@@ -110,7 +110,12 @@
             cursor: not-allowed;
         }
 </style>
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center" style="margin-top: 20px;">
+        @TempData["SuccessMessage"]
+    </div>
+}
 <!DOCTYPE html>
 <html lang="en">
 @await Component.InvokeAsync("_HeadUILayoutComponentPartial")
@@ -374,5 +379,17 @@
     @await Component.InvokeAsync("_FooterUlLayoutComponentPartial")
 
     @await Component.InvokeAsync("_ScriptUILayoutComponentPartial")
+
 </body>
 </html>
+<script>
+    // 10000 milisaniye = 10 saniye sonra alert kutusunu yavaşça kapatır
+    setTimeout(function() {
+        var alert = document.querySelector('.alert-success');
+        if (alert) {
+            alert.style.transition = "opacity 0.5s ease";
+            alert.style.opacity = "0";
+            setTimeout(function() { alert.remove(); }, 500);
+        }
+    }, 15000    ); // <-- Buradaki 5000 değerini 10000 yaptım
+</script>

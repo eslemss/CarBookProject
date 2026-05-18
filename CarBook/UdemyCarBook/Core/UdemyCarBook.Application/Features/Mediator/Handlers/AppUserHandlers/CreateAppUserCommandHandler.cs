@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UdemyCarBook.Application.Enums;
 using UdemyCarBook.Application.Features.Mediator.Commands.AppUserCommands;
@@ -23,11 +20,17 @@ namespace UdemyCarBook.Application.Features.Mediator.Handlers.AppUserHandlers
             await _repository.CreateAsync(new AppUser
             {
                 Password = request.Password,
-                Username = request.Username,
+
+                // DEĞİŞİKLİK BURADA: Artık Username değil, UserName kullanıyoruz.
+                UserName = request.Username,
+
                 AppRoleId = (int)RolesType.Member,
                 Email = request.Email,
                 Name = request.Name,
-                Surname = request.Surname
+                Surname = request.Surname,
+
+                // Eğer AppUser entity sınıfında ImageUrl alanı zorunluysa buraya varsayılan ekleyebilirsin:
+                ImageUrl = "/images/default-avatar.png"
             });
         }
     }

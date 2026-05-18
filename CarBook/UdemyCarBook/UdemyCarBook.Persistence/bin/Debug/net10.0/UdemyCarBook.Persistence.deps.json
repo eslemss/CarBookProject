@@ -917,6 +917,8 @@
           "FluentValidation": "11.9.0",
           "FluentValidation.AspNetCore": "11.3.0",
           "MediatR": "14.0.0",
+          "Microsoft.EntityFrameworkCore": "10.0.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.1",
           "System.IdentityModel.Tokens.Jwt": "8.0.1",
           "UdemyCarBook.Domain": "1.0.0"
         },

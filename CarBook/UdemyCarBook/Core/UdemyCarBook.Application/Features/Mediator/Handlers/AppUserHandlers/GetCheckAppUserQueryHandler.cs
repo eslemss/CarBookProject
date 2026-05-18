@@ -19,15 +19,14 @@ namespace UdemyCarBook.Application.Features.Mediator.Handlers.AppUserHandlers
         public async Task<GetCheckAppUserQueryResult> Handle(GetCheckAppUserQuery request, CancellationToken cancellationToken)
         {
             var values = new GetCheckAppUserQueryResult();
-            var user = await _appUserRepository.GetByFilterAsync(x => x.Username == request.Username && x.Password == request.Password);
-            if (user == null)
+            var user = await _appUserRepository.GetByFilterAsync(x => x.UserName == request.Username && x.Password == request.Password); if (user == null)
             {
                 values.IsExist = false;
             }
             else
             {
                 values.IsExist = true;
-                values.Username = user.Username;
+                values.UserName = user.UserName;
                 values.Role = (await _appRoleRepository.GetByFilterAsync(x => x.AppRoleId == user.AppRoleId)).AppRoleName;
                 values.Id = user.AppUserId;
             }

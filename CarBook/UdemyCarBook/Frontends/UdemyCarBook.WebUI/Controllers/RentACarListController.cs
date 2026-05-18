@@ -14,18 +14,17 @@ namespace UdemyCarBook.WebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
+
         public async Task<IActionResult> Index(int id)
         {
-            // TempData'dan veriyi alırken "Peek" kullanırsan veri silinmez
-            var locationID = TempData["locationID"];
+            // Peek kullanarak veriyi sadece 'dikizliyoruz', silinmiyor.
+            var locationID = TempData.Peek("locationID");
 
             if (locationID == null)
             {
-                // Eğer veri boşsa kullanıcıyı hata almaması için arama sayfasına geri gönder
                 return RedirectToAction("Index", "Default");
             }
 
-            // Artık güvenle parse edebiliriz
             id = int.Parse(locationID.ToString());
             ViewBag.locationID = id;
 
@@ -36,6 +35,10 @@ namespace UdemyCarBook.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<FilterRentACarDto>>(jsonData);
+
+                // KRİTİK: Rezervasyon sayfasına geçene kadar tüm TempData'yı koru
+                TempData.Keep();
+
                 return View(values);
             }
             return View();

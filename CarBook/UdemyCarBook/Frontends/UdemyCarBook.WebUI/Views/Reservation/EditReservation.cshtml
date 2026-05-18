@@ -1,0 +1,168 @@
+﻿@model UdemyCarBook.Dto.ReservationDtos.UpdateReservationDto
+@{
+    ViewData["Title"] = "Rezervasyon Güncelle";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 mx-auto">
+                @* Formu biraz daraltıp ortaladık *@
+                <div class="card shadow-lg border-0 overflow-hidden">
+                    @* Başlık Bölümü Renklendirildi *@
+                    <div class="bg-primary p-4 d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center text-white">
+                            <div class="bg-white-50 p-2 rounded-circle me-3">
+                                <i class="fas fa-edit text-white fa-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="m-0 font-weight-bold text-white">Rezervasyon Güncelleme Paneli</h4>
+                                <small class="text-white-50">#@Model.ReservationID numaralı rezervasyonu düzenliyorsunuz.</small>
+                            </div>
+                        </div>
+                        <a href="/Reservation/Index" class="btn btn-sm btn-light text-primary fw-bold">
+                            <i class="fas fa-arrow-left me-1"></i> Listeye Dön
+                        </a>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <form method="post" action="/Reservation/EditReservation/@Model.ReservationID">
+
+                            @* Gizli Alanlar *@
+                            <input type="hidden" asp-for="ReservationID" />
+                            <input type="hidden" asp-for="AppUserId" />
+                            <input type="hidden" asp-for="PickUpFull" />
+                            <input type="hidden" asp-for="DropOffFull" />
+                            <input type="hidden" asp-for="Age" />
+                            <input type="hidden" asp-for="DriverLicenseNumber" />
+
+                            @* 1. Bölüm: Müşteri Bilgileri *@
+                            <div class="mb-5">
+                                <h5 class="text-primary border-bottom pb-2 mb-4"><i class="fas fa-user me-2"></i>Müşteri Bilgileri</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Ad</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-user-circle text-muted"></i></span>
+                                            <input type="text" asp-for="Name" class="form-control border-start-0" placeholder="Müşteri Adı" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Soyad</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-user-tag text-muted"></i></span>
+                                            <input type="text" asp-for="Surname" class="form-control border-start-0" placeholder="Müşteri Soyadı" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">E-posta</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-envelope text-muted"></i></span>
+                                            <input type="email" asp-for="Email" class="form-control border-start-0" placeholder="Örn: ornek@mail.com" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Telefon</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-phone text-muted"></i></span>
+                                            <input type="text" asp-for="Phone" class="form-control border-start-0" placeholder="Örn: 05xx xxx xx xx" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* 2. Bölüm: Kiralama Bilgileri *@
+                            <div class="mb-4">
+                                <h5 class="text-primary border-bottom pb-2 mb-4"><i class="fas fa-car me-2"></i>Kiralama & Araç Bilgileri</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Alış Lokasyonu</label>
+                                        @Html.DropDownListFor(x => x.PickUpLocationID, (List<SelectListItem>)ViewBag.LocationList, "Seçiniz", new { @class = "form-select select2-custom" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Dönüş Lokasyonu</label>
+                                        @Html.DropDownListFor(x => x.DropOffLocationID, (List<SelectListItem>)ViewBag.LocationList, "Seçiniz", new { @class = "form-select select2-custom" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Araç Seçimi</label>
+                                        @Html.DropDownListFor(x => x.CarID, (List<SelectListItem>)ViewBag.CarList, "Seçiniz", new { @class = "form-select select2-custom" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Alış Tarihi</label>
+                                        <input type="datetime-local" asp-for="PickUpDate" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold text-dark small text-uppercase">Dönüş Tarihi</label>
+                                        <input type="datetime-local" asp-for="DropOffDate" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* Alt Buton Grubu *@
+                            <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top">
+                                <p class="text-muted small m-0 italic">* Tüm alanların doğruluğunu kontrol ediniz.</p>
+                                <div class="d-flex gap-3">
+                                    @* outline-danger yaparak hem kırmızı vurgusunu koruruz hem de "Kaydet" butonu kadar baskın olmamasını sağlarız *@
+                                    <a href="/Reservation/Index" class="btn btn-outline-danger px-4 fw-bold">
+                                        <i class="fas fa-times me-1"></i> İptal
+                                    </a>
+                                    <button type="submit" class="btn btn-primary px-5 shadow-sm fw-bold">
+                                        <i class="fas fa-save me-2"></i> Değişiklikleri Kaydet
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Modern Kart Tasarımı */
+    .card {
+        border-radius: 1rem;
+    }
+
+    .bg-primary {
+        background: linear-gradient(135deg, #4e73df 0%, #224abe 100%) !important;
+    }
+
+    .bg-white-50 {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Input ve Select Modernize */
+    .form-control, .form-select, .input-group-text {
+        padding: 0.6rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #e0e0e0;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.15);
+        }
+
+    /* Input Group İkonları */
+    .input-group-text {
+        background-color: #f8f9fa;
+    }
+
+    /* Alt Bölüm Header */
+    h5.text-primary {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    /* Responsive Ayarlar */
+    @@media (max-width: 768px) {
+        .card-body {
+            padding: 1.5rem !important;
+        }
+    }
+</style>

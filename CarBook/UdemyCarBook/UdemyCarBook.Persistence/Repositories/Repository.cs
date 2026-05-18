@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using UdemyCarBook.Application.Interfaces;
 using UdemyCarBook.Persistence.Context;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace UdemyCarBook.Persistence.Repositories
 {
@@ -13,21 +14,32 @@ namespace UdemyCarBook.Persistence.Repositories
     {
         private readonly CarBookContext _context;
 
-        public  Repository(CarBookContext context)
+        public Repository(CarBookContext context)
         {
-           _context = context;
-        }
-        public async Task CreateAsync (T entity)
-        {
-          _context.Set<T>().Add(entity);
-         await _context.SaveChangesAsync();
-        }
-        public async Task<List<T>> GetAllAsync()
-        {
-        return await _context.Set<T>().ToListAsync();  
+            _context = context;
         }
 
-        public  async Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        public async Task CreateAsync(T entity)
+        {
+            _context.Set<T>().Add(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        // --- BURADAN SONRASINI DOLDURUYORUZ ---
+
+        // 1. İlişkili Tabloları (Include) Destekleyen Filtreli Getirme Metodu
+        // Bu metot sayesinde Handler içinde .Include() yazmadan verileri dolu getirebiliriz.
+        public async Task<List<T>> GetListByFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _context.Set<T>().Where(filter).ToListAsync();
+        }
+
+        public async Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter)
         {
             return await _context.Set<T>().SingleOrDefaultAsync(filter);
         }
@@ -37,18 +49,23 @@ namespace UdemyCarBook.Persistence.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-
         public async Task RemoveAsync(T entity)
         {
-          _context.Set<T>().Remove(entity); 
+            _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(T entity)
         {
-           _context.Set<T>().Update(entity);
-            await _context.SaveChangesAsync();  
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        // 2. IQueryable Desteği (Opsiyonel ama hayat kurtarır)
+        // Eğer Handler tarafında verileri çekerken esnek olmak istersen bu şarttır.
+        public IQueryable<T> GetQueryable()
+        {
+            return _context.Set<T>().AsQueryable();
         }
     }
-    
 }

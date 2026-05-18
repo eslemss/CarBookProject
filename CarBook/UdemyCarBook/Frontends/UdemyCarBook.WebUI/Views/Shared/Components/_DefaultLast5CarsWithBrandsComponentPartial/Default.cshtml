@@ -80,9 +80,9 @@
                                             @item.Price.ToString("N0") <small style="color: #999; font-weight: 400;">₺ / Günlük</small>
                                         </p>
                                     </div>
-
                                     <p class="d-flex mb-0 d-block">
-                                        <a href="/Reservation/Index/@item.CarID" class="btn btn-theme-primary py-2 mr-1">Hemen Kirala</a>
+                                        @* Admin kısmını sildik, metot adını ve ID yapısını düzelttik *@
+                                        <a href="/Reservation/CreateReservation/@item.CarID" class="btn btn-theme-primary py-2 mr-1">Hemen Kirala</a>
                                         <a href="/Car/CarDetail/@item.CarID" class="btn btn-theme-outline py-2 ml-1">Detaylar</a>
                                     </p>
                                 </div>

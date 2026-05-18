@@ -1965,6 +1965,8 @@
           "FluentValidation": "11.9.0",
           "FluentValidation.AspNetCore": "11.3.0",
           "MediatR": "12.2.0",
+          "Microsoft.EntityFrameworkCore": "8.0.12",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.12",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "System.IdentityModel.Tokens.Jwt": "8.0.1",
           "UdemyCarBook.Domain": "1.0.0"
@@ -5102,6 +5104,9 @@
         }
       },
       "warningProperties": {
+        "noWarn": [
+          "NU1903"
+        ],
         "warnAsError": [
           "NU1605"
         ]

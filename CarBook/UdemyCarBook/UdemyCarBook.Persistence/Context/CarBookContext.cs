@@ -52,6 +52,11 @@ namespace UdemyCarBook.Persistence.Context
                 .WithMany(y => y.DropOffReservation)
                 .HasForeignKey(z => z.DropOffLocationID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+            modelBuilder.Entity<AppUser>()
+        .Property(x => x.UserName)
+        .HasColumnName("Username"); // SQL'deki sütun adıyla birebir eşledik
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

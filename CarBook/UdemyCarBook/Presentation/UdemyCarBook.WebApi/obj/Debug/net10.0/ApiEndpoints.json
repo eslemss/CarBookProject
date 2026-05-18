@@ -74,6 +74,54 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.AppUsersController",
+    "Method": "UpdateAppUser",
+    "RelativePath": "api/AppUsers",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "UdemyCarBook.Application.Features.Mediator.Commands.AppUserCommands.UpdateAppUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.AppUsersController",
+    "Method": "GetAppUser",
+    "RelativePath": "api/AppUsers/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.AppUsersController",
+    "Method": "GetUserRentals",
+    "RelativePath": "api/AppUsers/GetUserRentals/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "UdemyCarBook.WebApi.Controllers.AuthorsController",
     "Method": "AuthorList",
     "RelativePath": "api/Authors",
@@ -1230,6 +1278,16 @@
   },
   {
     "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
+    "Method": "ReservationList",
+    "RelativePath": "api/Reservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
     "Method": "CreateReservation",
     "RelativePath": "api/Reservations",
     "HttpMethod": "POST",
@@ -1239,6 +1297,96 @@
       {
         "Name": "command",
         "Type": "UdemyCarBook.Application.Features.Mediator.Commands.ReservationCommands.CreateReservationCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
+    "Method": "UpdateReservation",
+    "RelativePath": "api/Reservations",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "UdemyCarBook.Application.Features.Mediator.Commands.ReservationCommands.UpdateReservationCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
+    "Method": "GetReservation",
+    "RelativePath": "api/Reservations/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
+    "Method": "CheckAvailability",
+    "RelativePath": "api/Reservations/CheckAvailability",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pickup",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "dropoff",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
+    "Method": "ReservationStatusChangeApproved",
+    "RelativePath": "api/Reservations/ReservationStatusChangeApproved/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UdemyCarBook.WebApi.Controllers.ReservationsController",
+    "Method": "ReservationStatusChangeCancelled",
+    "RelativePath": "api/Reservations/ReservationStatusChangeCancelled/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

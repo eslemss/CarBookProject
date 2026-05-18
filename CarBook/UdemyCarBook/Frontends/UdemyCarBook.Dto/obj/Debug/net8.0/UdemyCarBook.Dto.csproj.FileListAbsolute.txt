@@ -10,3 +10,6 @@ C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook
 C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\refint\UdemyCarBook.Dto.dll
 C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCarBook.Dto.pdb
 C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\ref\UdemyCarBook.Dto.dll
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\bin\Debug\net8.0\UdemyCarBook.Domain.dll
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\bin\Debug\net8.0\UdemyCarBook.Domain.pdb
+C:\Users\gokha\OneDrive\Desktop\eslemstajyer\UdemyCarBook\Frontends\UdemyCarBook.Dto\obj\Debug\net8.0\UdemyCar.D0E29F4F.Up2Date

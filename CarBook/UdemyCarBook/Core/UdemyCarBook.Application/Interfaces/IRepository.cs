@@ -13,8 +13,9 @@ namespace UdemyCarBook.Application.Interfaces
             Task UpdateAsync(T entity);
             Task RemoveAsync(T entity);
             Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter);
-    
-
+        Task<List<T>> GetListByFilterAsync(Expression<Func<T, bool>> filter);
+        IQueryable<T> GetQueryable(); // Include yapabilmek için bu çok önemli!
     }
+
 
 }

@@ -126,6 +126,10 @@ namespace UdemyCarBook.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -135,6 +139,10 @@ namespace UdemyCarBook.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -553,6 +561,9 @@ namespace UdemyCarBook.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentACarProcessID"));
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CarID")
                         .HasColumnType("int");
 
@@ -585,10 +596,16 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Property<TimeSpan>("PickUpTime")
                         .HasColumnType("time");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("RentACarProcessID");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CarID");
 
@@ -608,6 +625,9 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CarID")
                         .HasColumnType("int");
 
@@ -615,8 +635,12 @@ namespace UdemyCarBook.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DriverLicenseYear")
-                        .HasColumnType("int");
+                    b.Property<string>("DriverLicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DropOffDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("DropOffLocationID")
                         .HasColumnType("int");
@@ -632,6 +656,9 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PickUpDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("PickUpLocationID")
                         .HasColumnType("int");
@@ -914,6 +941,12 @@ namespace UdemyCarBook.Persistence.Migrations
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.RentACarProcess", b =>
                 {
+                    b.HasOne("UdemyCarBook.Domain.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Car", "Car")
                         .WithMany("RentACarProcesses")
                         .HasForeignKey("CarID")
@@ -925,6 +958,8 @@ namespace UdemyCarBook.Persistence.Migrations
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Car");
 

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-
 namespace UdemyCarBook.Domain.Entities
 {
     public class RentACarProcess
     {
-
         public int RentACarProcessID { get; set; }
         public int CarID { get; set; }
         public Car Car { get; set; }
@@ -26,12 +24,18 @@ namespace UdemyCarBook.Domain.Entities
 
         [DataType(DataType.Time)]
         public TimeSpan DropOffTime { get; set; }
+
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
+
         public string PickUpDescription { get; set; }
         public string DropOffDescription { get; set; }
         public decimal TotalPrice { get; set; }
-    }
 
-    }
+        // Kiralama Durumu (Yeni eklendi)
+        public string Status { get; set; }
 
+        public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
+    }
+}

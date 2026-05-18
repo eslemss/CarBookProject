@@ -1,0 +1,47 @@
+﻿@model List<UdemyCarBook.Dto.ReservationDtos.ResultReservationDto>
+@{
+    ViewData["Title"] = "Kiralama Geçmişim";
+    Layout = "~/Views/ULayout/Index.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">Kiralama Geçmişim</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Araç</th>
+                        <th>Alış Lokasyonu</th>
+                        <th>İade Lokasyonu</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ReservationID</td>
+                                <td>@item.CarName</td>
+                                <td>@item.PickUpLocationName</td>
+                                <td>@item.DropOffLocationName</td>
+                                <td><span class="badge badge-success px-3 py-2">@item.Status</span></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-4">Henüz bir kiralama geçmişiniz bulunmamaktadır.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

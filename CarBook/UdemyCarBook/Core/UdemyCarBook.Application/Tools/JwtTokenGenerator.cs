@@ -17,13 +17,23 @@ namespace UdemyCarBook.Application.Tools
         {
             var claims = new List<Claim>();
 
+            // Rol bilgisini ekliyoruz
             if (!string.IsNullOrWhiteSpace(result.Role))
                 claims.Add(new Claim(ClaimTypes.Role, result.Role));
 
+            // --- KRİTİK DÜZELTME: ID BİLGİSİNİ HER İKİ FORMATTA DA EKLİYORUZ ---
+            // 1. Standart NameIdentifier (Senin mevcut yapın)
             claims.Add(new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()));
 
-            if (!string.IsNullOrWhiteSpace(result.Username))
-                claims.Add(new Claim("Username", result.Username));
+            // 2. JwtRegisteredClaimNames.NameId (WebUI Controller'ın beklediği format)
+            claims.Add(new Claim(JwtRegisteredClaimNames.NameId, result.Id.ToString()));
+
+            // 3. Manuel "Id" etiketi (En garanti yol)
+            claims.Add(new Claim("Id", result.Id.ToString()));
+            // ----------------------------------------------------------------
+
+            if (!string.IsNullOrWhiteSpace(result.UserName))
+                claims.Add(new Claim("Username", result.UserName));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwkTokenDefaults.Key));
 
@@ -31,7 +41,13 @@ namespace UdemyCarBook.Application.Tools
 
             var expireDate = DateTime.UtcNow.AddDays(JwkTokenDefaults.Expire);
 
-            JwtSecurityToken token = new JwtSecurityToken(issuer: JwkTokenDefaults.ValidIssuer, audience: JwkTokenDefaults.ValidAudience, claims: claims, notBefore: DateTime.UtcNow, expires: expireDate, signingCredentials: signinCredentials);
+            JwtSecurityToken token = new JwtSecurityToken(
+                issuer: JwkTokenDefaults.ValidIssuer,
+                audience: JwkTokenDefaults.ValidAudience,
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: expireDate,
+                signingCredentials: signinCredentials);
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 

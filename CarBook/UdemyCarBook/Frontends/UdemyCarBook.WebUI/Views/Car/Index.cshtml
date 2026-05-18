@@ -74,7 +74,7 @@
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     @* Giriş yapmışsa direkt rezervasyona *@
-                                    <a href="/Reservation/Index/@item.CarId" class="btn btn-theme-primary py-2 mr-1">Hemen Kirala</a>
+                                    <a href="/Reservation/CreateReservation/@item.CarId" class="btn btn-theme-primary py-2 mr-1">Hemen Kirala</a>
                                 }
                                 else
                                 {
